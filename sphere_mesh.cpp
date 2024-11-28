@@ -566,6 +566,57 @@ void SphereMesh::duplicateSphere(int i)
     spheres.push_back(newS);
 }
 
+void SphereMesh::removeSphere(int i)
+{
+    if (i >= spheres.size() || i < 0)
+        return;
+
+    for (int idx = 0; idx < capsuloids.size();)
+    {
+        int x = capsuloids[idx].indices[0];
+        int y = capsuloids[idx].indices[1];
+        if (x == i || y == i)
+            capsuloids.erase(capsuloids.begin() + idx);
+        else
+        {
+            if (x > i) x--;
+            if (y > i) y--;
+            capsuloids[idx] = {x, y};
+            idx++;
+        }
+    }
+
+    for (int idx = 0; idx < prysmoids.size();)
+    {
+        int x = prysmoids[idx].indices[0];
+        int y = prysmoids[idx].indices[1];
+        int z = prysmoids[idx].indices[2];
+
+        if (x == i || y == i || z == i)
+        {
+            std::vector<int> remaining;
+            if (x != i) remaining.push_back(x);
+            if (y != i) remaining.push_back(y);
+            if (z != i) remaining.push_back(z);
+
+            if (remaining.size() == 2)
+                addCapsuloid(remaining[0], remaining[1]);
+
+            prysmoids.erase(prysmoids.begin() + idx);
+        }
+        else
+        {
+            if (x > i) x--;
+            if (y > i) y--;
+            if (z > i) z--;
+            prysmoids[idx] = {x, y, z};
+            idx++;
+        }
+    }
+
+    spheres.erase(spheres.begin() + i);
+}
+
 void SphereMesh::addCapsuloid(int i, int j)
 {
     if (i >= spheres.size() || i < 0 || j >= spheres.size() || j < 0 || i == j)
@@ -649,6 +700,9 @@ void SphereMesh::removeLink(int i, int j, int k)
         if (x == indices[0] && y == indices[1] && z == indices[2])
         {
             prysmoids.erase(prysmoids.begin() + idx);
+            addCapsuloid(x, y);
+            addCapsuloid(x, z);
+            addCapsuloid(z, y);
             return;
         }
     }

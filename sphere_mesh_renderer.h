@@ -28,6 +28,7 @@ public:
     bool filled {};
 
     int numberOfSpheres {0};
+    float connectivitySize {1.0f};
     float sphereSize {1.0f};
 
     SphereMeshRenderer(SphereMesh* referenceSM);

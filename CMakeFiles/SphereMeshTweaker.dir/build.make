@@ -306,7 +306,7 @@ SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /usr/local/lib/QtWidgets
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /usr/local/lib/QtOpenGL.framework/Versions/A/QtOpenGL
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /usr/local/lib/QtGui.framework/Versions/A/QtGui
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /usr/local/lib/QtCore.framework/Versions/A/QtCore
-SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/lib/libz.tbd
+SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk/usr/lib/libz.tbd
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SphereMeshTweaker.dir/link.txt --verbose=$(VERBOSE)

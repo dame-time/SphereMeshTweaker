@@ -127,6 +127,7 @@ public:
                                const glm::vec3& sphereCenter, float sphereRadius, float& t, glm::vec3& hitPos);
 
     void duplicateSphere(int i);
+    void removeSphere(int i);
     void addCapsuloid(int i, int j);
     void addPrysmoid(int i, int j, int k);
     void removeLink(int i, int j);

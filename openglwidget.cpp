@@ -7,6 +7,8 @@
 #include <QKeyEvent>
 
 #define GLM_ENABLE_EXPERIMENTAL
+#define MAX_STORED_UNDO_OPERATIONS 5000
+
 #include <glm/gtx/string_cast.hpp>
 
 using namespace SM;
@@ -176,6 +178,7 @@ void OpenGLWidget::mousePressEvent(QMouseEvent *event) {
 
 void OpenGLWidget::mouseReleaseEvent(QMouseEvent *event) {
     dragging = false;
+    stateSaved = false;
 }
 
 void OpenGLWidget::mouseMoveEvent(QMouseEvent *event) {
@@ -188,10 +191,22 @@ void OpenGLWidget::mouseMoveEvent(QMouseEvent *event) {
     if (enableGeometricOperations)
     {
         if (event->buttons() & Qt::RightButton)
+        {
+            if (!stateSaved) {
+                saveState();
+                stateSaved = true;
+            }
             scaleSelectedSphere(currentPos);
+        }
 
         if (dragging)
+        {
+            if (!stateSaved) {
+                saveState();
+                stateSaved = true;
+            }
             translateSelectedSphere(currentPos);
+        }
 
         return;
     }
@@ -219,7 +234,62 @@ void OpenGLWidget::wheelEvent(QWheelEvent *event) {
 }
 
 void OpenGLWidget::keyPressEvent(QKeyEvent* event) {
-    switch (event->key()) {
+    if (event->modifiers() & Qt::ControlModifier) {
+        switch (event->key()) {
+        case Qt::Key_D:
+            if (selectedSphere == -1)
+                return;
+
+            saveState();
+
+            sphereMesh->removeSphere(selectedSphere);
+            smRenderer->updateSphereMesh(sphereMesh);
+            resetSelection();
+            update();
+            break;
+
+        case Qt::Key_E:
+            if (recentSelectedSpheres.size() < 1 || selectedSphere == -1)
+                return;
+
+            saveState();
+
+            sphereMesh->removeLink(selectedSphere, recentSelectedSpheres.back());
+            smRenderer->updateSphereMesh(sphereMesh);
+            resetSelection();
+            update();
+            break;
+
+        case Qt::Key_T:
+            if (recentSelectedSpheres.size() < 2 || selectedSphere == -1)
+                return;
+
+            saveState();
+
+            sphereMesh->removeLink(
+                selectedSphere,
+                recentSelectedSpheres[recentSelectedSpheres.size() - 1],
+                recentSelectedSpheres[recentSelectedSpheres.size() - 2]
+                );
+            smRenderer->updateSphereMesh(sphereMesh);
+            resetSelection();
+            update();
+            break;
+
+        case Qt::Key_Z:
+            undo();
+            return;
+
+        default:
+            QOpenGLWidget::keyPressEvent(event);
+            break;
+        }
+
+        return;
+    }
+
+    switch (event->key())
+    {
         case Qt::Key_R:
             camera.resetRotation();
             update();
@@ -244,6 +314,11 @@ void OpenGLWidget::keyPressEvent(QKeyEvent* event) {
             enableGeometricOperations = true;
             break;
 
+        case Qt::Key_V:
+            mesh->isVisible = !mesh->isVisible;
+            update();
+            break;
+
         case Qt::Key_B:
             sphereMeshShader = new Shader(":/shaders/impostor.vert", ":/shaders/impostor.frag");
             sphereMeshShader->bindAttribute("aPos", 0);
@@ -251,9 +326,38 @@ void OpenGLWidget::keyPressEvent(QKeyEvent* event) {
 
             smRenderer = new SphereMeshRenderer(sphereMesh);
             smRenderer->useShader(sphereMeshShader);
+            update();
             break;
 
         case Qt::Key_U:
+            resetSelection();
+            update();
+            break;
+
+        case Qt::Key_E:
+            if (recentSelectedSpheres.size() < 1 || selectedSphere == -1)
+                return;
+
+            saveState();
+
+            sphereMesh->addCapsuloid(selectedSphere, recentSelectedSpheres.back());
+            smRenderer->updateSphereMesh(sphereMesh);
+            resetSelection();
+            update();
+            break;
+
+        case Qt::Key_T:
+            if (recentSelectedSpheres.size() < 2 || selectedSphere == -1)
+                return;
+
+            saveState();
+
+            sphereMesh->addPrysmoid(
+                                    selectedSphere,
+                                    recentSelectedSpheres[recentSelectedSpheres.size() - 1],
+                                    recentSelectedSpheres[recentSelectedSpheres.size() - 2]
+                );
+            smRenderer->updateSphereMesh(sphereMesh);
             resetSelection();
             update();
             break;
@@ -312,6 +416,28 @@ void OpenGLWidget::scaleSelectedSphere(const QPoint& currentPos) {
     update();
 }
 
+void OpenGLWidget::saveState() {
+    undoHistory.push_back(State(*sphereMesh, selectedSphere, recentSelectedSpheres));
+
+    if (undoHistory.size() > MAX_STORED_UNDO_OPERATIONS)
+        undoHistory.pop_front();
+}
+
+void OpenGLWidget::undo()
+{
+    if (undoHistory.empty()) return;
+
+    State lastState = undoHistory.back();
+    undoHistory.pop_back();
+
+    *sphereMesh = lastState.sphereMeshState;
+    selectedSphere = lastState.selectedSphere;
+    recentSelectedSpheres = lastState.recentSelectedSpheres;
+
+    smRenderer->updateSphereMesh(sphereMesh);
+    update();
+}
+
 void OpenGLWidget::resetSelection()
 {
     if (selectedSphere != -1) {
@@ -331,6 +457,66 @@ void OpenGLWidget::duplicateSelectedSphere()
 
     sphereMesh->duplicateSphere(selectedSphere);
     smRenderer->updateSphereMesh(sphereMesh);
+}
+
+void OpenGLWidget::deleteSelectedSphere()
+{
+    if (selectedSphere == -1) return;
+
+    sphereMesh->removeSphere(selectedSphere);
+    smRenderer->updateSphereMesh(sphereMesh);
+}
+
+void OpenGLWidget::linkCap()
+{
+    if (recentSelectedSpheres.size() < 1 || selectedSphere == -1)
+        return;
+
+    sphereMesh->addCapsuloid(selectedSphere, recentSelectedSpheres.back());
+    smRenderer->updateSphereMesh(sphereMesh);
+    resetSelection();
+    update();
+}
+
+void OpenGLWidget::linkTri()
+{
+    if (recentSelectedSpheres.size() < 2 || selectedSphere == -1)
+        return;
+
+    sphereMesh->addPrysmoid(
+        selectedSphere,
+        recentSelectedSpheres[recentSelectedSpheres.size() - 1],
+        recentSelectedSpheres[recentSelectedSpheres.size() - 2]
+        );
+    smRenderer->updateSphereMesh(sphereMesh);
+    resetSelection();
+    update();
+}
+
+void OpenGLWidget::unlinkCap()
+{
+    if (recentSelectedSpheres.size() < 1 || selectedSphere == -1)
+        return;
+
+    sphereMesh->removeLink(selectedSphere, recentSelectedSpheres.back());
+    smRenderer->updateSphereMesh(sphereMesh);
+    resetSelection();
+    update();
+}
+
+void OpenGLWidget::unlinkTri()
+{
+    if (recentSelectedSpheres.size() < 2 || selectedSphere == -1)
+        return;
+
+    sphereMesh->removeLink(
+        selectedSphere,
+        recentSelectedSpheres[recentSelectedSpheres.size() - 1],
+        recentSelectedSpheres[recentSelectedSpheres.size() - 2]
+        );
+    smRenderer->updateSphereMesh(sphereMesh);
+    resetSelection();
+    update();
 }
 
 void OpenGLWidget::setMesh(Mesh* newMesh) {

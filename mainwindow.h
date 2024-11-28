@@ -22,6 +22,7 @@ public:
 private slots:
     void onCheckSMFilled(int state);
     void onCheckSMVisible(int state);
+    void onCheckMeshVisible(int state);
 
     void onSlider1ValueChanged(int value);
     void onLabelEditingFinished();
@@ -37,7 +38,10 @@ private:
     void onLoadMesh();
 
     void onDuplicateSphere();
-    void onLinkSpheres();
-    void onUnlinkSpheres();
+    void onDeleteSphere();
+    void onLinkCap();
+    void onLinkTri();
+    void onUnlinkCap();
+    void onUnlinkTri();
 };
 #endif // MAINWINDOW_H

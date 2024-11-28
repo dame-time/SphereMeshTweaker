@@ -38,7 +38,7 @@ void SphereMeshRenderer::render() const
     if (!filled)
         return;
 
-    if (sphereSize < 1.0f)
+    if (connectivitySize < 1.0f)
     {
         renderConnectivity();
         return;
@@ -70,7 +70,7 @@ void SphereMeshRenderer::unselectRecentSphere(int i) {
 void SphereMeshRenderer::renderSpheres() const
 {
     for(int i = 0; i < sm->spheres.size(); i++)
-        renderSphere(sm->spheres[i].center, sm->spheres[i].radius, renderableSpheres[i].getColor());
+        renderSphere(sm->spheres[i].center, sm->spheres[i].radius * sphereSize, renderableSpheres[i].getColor());
 }
 
 void SphereMeshRenderer::renderConnectivity() const
@@ -118,7 +118,7 @@ void SphereMeshRenderer::drawSpheresOverPrysmoid(int index) const
                                         sm->spheres[p.indices[0]].radius * ci +
                                         sm->spheres[p.indices[1]].radius * cj +
                                         sm->spheres[p.indices[2]].radius * ck,
-                                    (float)sphereSize);
+                                    (float)connectivitySize);
 
             renderSphere(origin, radius, color[dim]);
         }
@@ -135,7 +135,7 @@ void SphereMeshRenderer::drawSpheresOverCapsuloid(int index) const
                      glm::mix(
                          0.001f,
                          glm::mix(sm->spheres[c.indices[0]].radius, sm->spheres[c.indices[1]].radius, i * 1.0 / (numberOfSpheres - 1)),
-                         (float)sphereSize
+                         (float)connectivitySize
                          ),
                      color);
     }

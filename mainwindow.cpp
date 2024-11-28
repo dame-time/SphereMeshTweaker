@@ -20,15 +20,26 @@ MainWindow::MainWindow(QWidget *parent)
     ui->topToolBar->setIconSize(QSize(24, 24));
     ui->leftToolBar->setIconSize(QSize(24, 24));
 
-    QAction *leftAction1 = new QAction(QIcon(iconPath + "select.png"), "Select", this);
-    QAction *leftAction2 = new QAction(QIcon(iconPath + "plus.png"), "Add", this);
-    QAction *leftAction3 = new QAction(QIcon(iconPath + "eraser.png"), "Delete", this);
+    QAction *addButton = new QAction(QIcon(iconPath + "plus.png"), "Add", this);
+    QAction *deleteButton = new QAction(QIcon(iconPath + "eraser.png"), "Delete", this);
+    QAction *linkCap = new QAction(QIcon(iconPath + "linkCap.png"), "Link Capsule", this);
+    QAction *linkTri = new QAction(QIcon(iconPath + "linkTri.png"), "Link Prysmoid", this);
+    QAction *unlinkCap = new QAction(QIcon(iconPath + "deleteLinkCap.png"), "Delete Capsule Link", this);
+    QAction *unlinkTri = new QAction(QIcon(iconPath + "deleteLinkTri.png"), "Delete Prysmoid Link", this);
 
-    connect(leftAction2, &QAction::triggered, this, &MainWindow::onDuplicateSphere);
+    connect(addButton, &QAction::triggered, this, &MainWindow::onDuplicateSphere);
+    connect(deleteButton, &QAction::triggered, this, &MainWindow::onDeleteSphere);
+    connect(linkCap, &QAction::triggered, this, &MainWindow::onLinkCap);
+    connect(linkTri, &QAction::triggered, this, &MainWindow::onLinkTri);
+    connect(unlinkCap, &QAction::triggered, this, &MainWindow::onUnlinkCap);
+    connect(unlinkTri, &QAction::triggered, this, &MainWindow::onUnlinkTri);
 
-    ui->leftToolBar->addAction(leftAction1);
-    ui->leftToolBar->addAction(leftAction2);
-    ui->leftToolBar->addAction(leftAction3);
+    ui->leftToolBar->addAction(addButton);
+    ui->leftToolBar->addAction(deleteButton);
+    ui->leftToolBar->addAction(linkCap);
+    ui->leftToolBar->addAction(linkTri);
+    ui->leftToolBar->addAction(unlinkCap);
+    ui->leftToolBar->addAction(unlinkTri);
 
     QAction *topAction1 = new QAction(QIcon(iconPath + "save.png"), "Save", this);
     QAction *topAction2 = new QAction(QIcon(iconPath + "export.png"), "Export As...", this);
@@ -44,13 +55,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->horizontalSlider->setMaximum(50);
     ui->spinBox->setMaximum(50);
 
-    ui->horizontalSlider_2->setMinimum(0);
-    ui->spinBox_2->setMinimum(0.0);
+    ui->horizontalSlider_2->setMinimum(2);
+    ui->spinBox_2->setMinimum(0.1);
     ui->horizontalSlider_2->setMaximum(20);
     ui->spinBox_2->setMaximum(1.0);
 
     connect(ui->checkBox, &QCheckBox::stateChanged, this, &MainWindow::onCheckSMFilled);
     connect(ui->checkBox_2, &QCheckBox::stateChanged, this, &MainWindow::onCheckSMVisible);
+    connect(ui->checkBox_3, &QCheckBox::stateChanged, this, &MainWindow::onCheckMeshVisible);
 
     connect(ui->horizontalSlider, &QSlider::valueChanged, this, &MainWindow::onSlider1ValueChanged);
     connect(ui->spinBox, QOverload<int>::of(&QSpinBox::valueChanged), ui->horizontalSlider, &QSlider::setValue);
@@ -85,6 +97,16 @@ void MainWindow::onCheckSMVisible(int state)
     openGLWidget->update();
 }
 
+void MainWindow::onCheckMeshVisible(int state)
+{
+    if (state == Qt::Checked)
+        openGLWidget->mesh->isVisible = true;
+    else
+        openGLWidget->mesh->isVisible = false;
+
+    openGLWidget->update();
+}
+
 void MainWindow::onSlider1ValueChanged(int value)
 {
     openGLWidget->smRenderer->numberOfSpheres = value;
@@ -106,7 +128,13 @@ void MainWindow::onLabelEditingFinished()
 void MainWindow::onSlider2ValueChanged(int value)
 {
     float floatValue = value * 0.05f;
-    openGLWidget->smRenderer->sphereSize = floatValue;
+
+    openGLWidget->smRenderer->connectivitySize = floatValue;
+
+    if (floatValue >= 0.5f)
+        openGLWidget->smRenderer->sphereSize = 1.0f;
+    else
+        openGLWidget->smRenderer->sphereSize = floatValue * 2;
 
     ui->spinBox_2->setValue(floatValue);
 
@@ -117,7 +145,7 @@ void MainWindow::onSizeLabelEditingFinished()
 {
     int value = ui->spinBox_2->value() * 20;
 
-    openGLWidget->smRenderer->sphereSize = ui->spinBox_2->value();
+    openGLWidget->smRenderer->connectivitySize = ui->spinBox_2->value();
     ui->horizontalSlider_2->setValue(value);
 
     openGLWidget->update();
@@ -154,4 +182,30 @@ void MainWindow::onDuplicateSphere()
 {
     openGLWidget->duplicateSelectedSphere();
     openGLWidget->update();
+}
+
+void MainWindow::onDeleteSphere()
+{
+    openGLWidget->deleteSelectedSphere();
+    openGLWidget->update();
+}
+
+void MainWindow::onLinkCap()
+{
+    openGLWidget->linkCap();
+}
+
+void MainWindow::onLinkTri()
+{
+    openGLWidget->linkTri();
+}
+
+void MainWindow::onUnlinkCap()
+{
+    openGLWidget->unlinkCap();
+}
+
+void MainWindow::onUnlinkTri()
+{
+    openGLWidget->unlinkTri();
 }

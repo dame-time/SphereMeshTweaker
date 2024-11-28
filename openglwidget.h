@@ -16,6 +16,15 @@
 
 using namespace SM;
 
+struct State {
+    SphereMesh sphereMeshState;
+    int selectedSphere;
+    std::deque<int> recentSelectedSpheres;
+
+    State(const SphereMesh& mesh, int selSphere, const std::deque<int>& recentSelections)
+        : sphereMeshState(mesh), selectedSphere(selSphere), recentSelectedSpheres(recentSelections) {}
+};
+
 class OpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
     Q_OBJECT
 
@@ -32,6 +41,12 @@ public:
     void setSphereMesh(SphereMesh* newSphereMesh);
 
     void duplicateSelectedSphere();
+    void deleteSelectedSphere();
+
+    void linkCap();
+    void linkTri();
+    void unlinkCap();
+    void unlinkTri();
 
 protected:
     void initializeGL() override;
@@ -48,6 +63,10 @@ private:
     Camera camera;
     Shader* shader;
     Shader* sphereMeshShader;
+
+    bool stateSaved = false;
+
+    std::deque<State> undoHistory;
 
     bool enableGeometricOperations = false;
     bool dragging = false;
@@ -67,6 +86,9 @@ private:
 
     void loadSphereMesh(const std::string& filename);
     void saveSphereMesh(const std::string& filename);
+
+    void saveState();
+    void undo();
 
     void resetSelection();
 
