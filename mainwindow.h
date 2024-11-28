@@ -37,6 +37,7 @@ private:
     void onSaveMesh();
     void onLoadMesh();
 
+    void onUndo();
     void onDuplicateSphere();
     void onDeleteSphere();
     void onLinkCap();

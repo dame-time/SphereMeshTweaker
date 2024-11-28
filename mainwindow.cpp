@@ -7,6 +7,7 @@
 #include <QDir>
 #include <QCheckBox>
 #include <QFileDialog>
+#include <QWidgetAction>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -41,14 +42,24 @@ MainWindow::MainWindow(QWidget *parent)
     ui->leftToolBar->addAction(unlinkCap);
     ui->leftToolBar->addAction(unlinkTri);
 
-    QAction *topAction1 = new QAction(QIcon(iconPath + "save.png"), "Save", this);
-    QAction *topAction2 = new QAction(QIcon(iconPath + "export.png"), "Export As...", this);
+    QAction *topAction1 = new QAction(QIcon(iconPath + "save.png"), "Save...", this);
+    QAction *topAction2 = new QAction(QIcon(iconPath + "export.png"), "Import...", this);
+    QAction *topAction3 = new QAction(QIcon(iconPath + "undo.png"), "Undo", this);
+
+    QWidgetAction *separatorAction = new QWidgetAction(this);
+    QFrame *separator = new QFrame();
+    separator->setFrameShape(QFrame::VLine);
+    separator->setFrameShadow(QFrame::Sunken);
+    separatorAction->setDefaultWidget(separator);
 
     connect(topAction1, &QAction::triggered, this, &MainWindow::onSaveMesh);
     connect(topAction2, &QAction::triggered, this, &MainWindow::onLoadMesh);
+    connect(topAction3, &QAction::triggered, this, &MainWindow::onUndo);
 
     ui->topToolBar->addAction(topAction1);
     ui->topToolBar->addAction(topAction2);
+    ui->topToolBar->addAction(separatorAction);
+    ui->topToolBar->addAction(topAction3);
 
     ui->horizontalSlider->setMinimum(0);
     ui->spinBox->setMinimum(0);
@@ -75,6 +86,12 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::onUndo()
+{
+    openGLWidget->undo();
+    openGLWidget->update();
 }
 
 void MainWindow::onCheckSMFilled(int state)

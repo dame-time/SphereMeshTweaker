@@ -43,6 +43,9 @@ public:
     void duplicateSelectedSphere();
     void deleteSelectedSphere();
 
+    void saveState();
+    void undo();
+
     void linkCap();
     void linkTri();
     void unlinkCap();
@@ -86,9 +89,6 @@ private:
 
     void loadSphereMesh(const std::string& filename);
     void saveSphereMesh(const std::string& filename);
-
-    void saveState();
-    void undo();
 
     void resetSelection();
 

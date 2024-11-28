@@ -1624,4 +1624,6 @@ CMakeFiles/SphereMeshTweaker.dir/mainwindow.cpp.o: \
   /usr/local/lib/QtWidgets.framework/Headers/QFileDialog \
   /usr/local/lib/QtWidgets.framework/Headers/qfiledialog.h \
   /usr/local/include/QtCore/qdir.h \
-  /usr/local/include/QtWidgets/qdialog.h
+  /usr/local/include/QtWidgets/qdialog.h \
+  /usr/local/lib/QtWidgets.framework/Headers/QWidgetAction \
+  /usr/local/lib/QtWidgets.framework/Headers/qwidgetaction.h
