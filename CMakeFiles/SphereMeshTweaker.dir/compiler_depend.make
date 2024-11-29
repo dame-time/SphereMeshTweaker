@@ -5540,7 +5540,9 @@ CMakeFiles/SphereMeshTweaker.dir/mainwindow.cpp.o: mainwindow.cpp \
   /usr/local/lib/QtWidgets.framework/Headers/QFileDialog \
   /usr/local/lib/QtWidgets.framework/Headers/qfiledialog.h \
   /usr/local/include/QtCore/qdir.h \
-  /usr/local/include/QtWidgets/qdialog.h
+  /usr/local/include/QtWidgets/qdialog.h \
+  /usr/local/lib/QtWidgets.framework/Headers/QWidgetAction \
+  /usr/local/lib/QtWidgets.framework/Headers/qwidgetaction.h
 
 CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o: mesh.cpp \
   mesh.h \
@@ -17208,6 +17210,8 @@ external/assimp/include/assimp/postprocess.h:
 
 mesh.cpp:
 
+/usr/local/lib/QtWidgets.framework/Headers/QWidgetAction:
+
 /usr/local/lib/QtWidgets.framework/Headers/qfiledialog.h:
 
 /usr/local/lib/QtWidgets.framework/Headers/QCheckBox:
@@ -17299,6 +17303,8 @@ external/assimp/include/assimp/MathFunctions.h:
 external/assimp/include/assimp/matrix4x4.inl:
 
 external/assimp/include/assimp/color4.inl:
+
+/usr/local/lib/QtWidgets.framework/Headers/qwidgetaction.h:
 
 external/assimp/include/assimp/vector3.inl:
 

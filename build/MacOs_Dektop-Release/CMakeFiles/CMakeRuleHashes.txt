@@ -1,0 +1,7 @@
+# Hashes of file build rules.
+edd96825d25806767faf530ec4a20b2c CMakeFiles/SphereMeshTweaker_autogen
+d53571500f6be0f699b5c8707dff9945 external/assimp/CMakeFiles/uninstall
+f90569273ec1d79fc765e91b17839311 external/assimp/code/CMakeFiles/assimp_autogen
+ae18853e3ab55527b0a47eee1674f191 external/assimp/test/CMakeFiles/unit_autogen
+0f8e8166b19c973aeaa2226feeae7ac5 external/glm/glm/CMakeFiles/glm_autogen
+e16d79f0436fe11dbe67d1cf9786f987 qrc_resources.cpp

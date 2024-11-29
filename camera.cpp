@@ -44,23 +44,22 @@ void Camera::resetTranslation() {
 }
 
 void Camera::moveUp(float delta) {
-    upTranslation -= delta;
+    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+    target += up * delta;
 }
 
 void Camera::moveDown(float delta) {
-    upTranslation += delta;
+    glm::vec3 down = glm::vec3(0.0f, -1.0f, 0.0f);
+    target += down * delta;
 }
 
+
 void Camera::moveLeft(float delta) {
-    float phiRadians = glm::radians(phi);
-    glm::vec3 left = glm::vec3(-cos(phiRadians), 0.0f, sin(phiRadians));
-    target += left * delta;
+    target += glm::vec3(-1.0f, 0.0f, 0.0f) * delta;
 }
 
 void Camera::moveRight(float delta) {
-    float phiRadians = glm::radians(phi);
-    glm::vec3 right = glm::vec3(cos(phiRadians), 0.0f, -sin(phiRadians));
-    target += right * delta;
+    target += glm::vec3(1.0f, 0.0f, 0.0f) * delta;
 }
 
 void Camera::zoomIn(float delta) {
