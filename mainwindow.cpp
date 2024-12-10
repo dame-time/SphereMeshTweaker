@@ -8,6 +8,7 @@
 #include <QCheckBox>
 #include <QFileDialog>
 #include <QWidgetAction>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -43,8 +44,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->leftToolBar->addAction(unlinkTri);
 
     QAction *topAction1 = new QAction(QIcon(iconPath + "save.png"), "Save...", this);
-    QAction *topAction2 = new QAction(QIcon(iconPath + "export.png"), "Import...", this);
-    QAction *topAction3 = new QAction(QIcon(iconPath + "undo.png"), "Undo", this);
+    QAction *topAction2 = new QAction(QIcon(iconPath + "import.png"), "Import...", this);
+    QAction *topAction3 = new QAction(QIcon(iconPath + "export.png"), "Export Geometry...", this);
+    QAction *topAction4 = new QAction(QIcon(iconPath + "undo.png"), "Undo", this);
 
     QWidgetAction *separatorAction = new QWidgetAction(this);
     QFrame *separator = new QFrame();
@@ -54,20 +56,22 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(topAction1, &QAction::triggered, this, &MainWindow::onSaveMesh);
     connect(topAction2, &QAction::triggered, this, &MainWindow::onLoadMesh);
-    connect(topAction3, &QAction::triggered, this, &MainWindow::onUndo);
+    connect(topAction3, &QAction::triggered, this, &MainWindow::onExportGeometry);
+    connect(topAction4, &QAction::triggered, this, &MainWindow::onUndo);
 
     ui->topToolBar->addAction(topAction1);
     ui->topToolBar->addAction(topAction2);
-    ui->topToolBar->addAction(separatorAction);
     ui->topToolBar->addAction(topAction3);
+    ui->topToolBar->addAction(separatorAction);
+    ui->topToolBar->addAction(topAction4);
 
     ui->horizontalSlider->setMinimum(0);
     ui->spinBox->setMinimum(0);
     ui->horizontalSlider->setMaximum(50);
     ui->spinBox->setMaximum(50);
 
-    ui->horizontalSlider_2->setMinimum(2);
-    ui->spinBox_2->setMinimum(0.1);
+    ui->horizontalSlider_2->setMinimum(0);
+    ui->spinBox_2->setMinimum(0.0);
     ui->horizontalSlider_2->setMaximum(20);
     ui->spinBox_2->setMaximum(1.0);
 
@@ -146,12 +150,13 @@ void MainWindow::onSlider2ValueChanged(int value)
 {
     float floatValue = value * 0.05f;
 
-    openGLWidget->smRenderer->connectivitySize = floatValue;
-
     if (floatValue >= 0.5f)
-        openGLWidget->smRenderer->sphereSize = 1.0f;
+    {
+        openGLWidget->smRenderer->connectivitySize = std::clamp(2 * (floatValue - 0.5f), 0.05f, 1.0f);
+        openGLWidget->smRenderer->scale(1.0f);
+    }
     else
-        openGLWidget->smRenderer->sphereSize = floatValue * 2;
+        openGLWidget->smRenderer->scale(floatValue * 2);
 
     ui->spinBox_2->setValue(floatValue);
 
@@ -162,7 +167,7 @@ void MainWindow::onSizeLabelEditingFinished()
 {
     int value = ui->spinBox_2->value() * 20;
 
-    openGLWidget->smRenderer->connectivitySize = ui->spinBox_2->value();
+    // openGLWidget->smRenderer->connectivitySize = ui->spinBox_2->value();
     ui->horizontalSlider_2->setValue(value);
 
     openGLWidget->update();
@@ -226,3 +231,22 @@ void MainWindow::onUnlinkTri()
 {
     openGLWidget->unlinkTri();
 }
+
+void MainWindow::onExportGeometry() {
+    QString objData = QString::fromStdString(openGLWidget->smRenderer->exportGeometryAsString());
+
+    QString filePath = QFileDialog::getSaveFileName(this, "Save Geometry", "", "OBJ Files (*.obj)");
+
+    if (!filePath.isEmpty()) {
+        QFile file(filePath);
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QTextStream out(&file);
+            out << objData;
+            file.close();
+            QMessageBox::information(this, "Success", "Geometry exported successfully.");
+        } else {
+            QMessageBox::critical(this, "Error", "Failed to save the file.");
+        }
+    }
+}
+

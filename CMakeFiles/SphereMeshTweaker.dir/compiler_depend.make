@@ -5542,7 +5542,10 @@ CMakeFiles/SphereMeshTweaker.dir/mainwindow.cpp.o: mainwindow.cpp \
   /usr/local/include/QtCore/qdir.h \
   /usr/local/include/QtWidgets/qdialog.h \
   /usr/local/lib/QtWidgets.framework/Headers/QWidgetAction \
-  /usr/local/lib/QtWidgets.framework/Headers/qwidgetaction.h
+  /usr/local/lib/QtWidgets.framework/Headers/qwidgetaction.h \
+  /usr/local/lib/QtWidgets.framework/Headers/QMessageBox \
+  /usr/local/lib/QtWidgets.framework/Headers/qmessagebox.h \
+  /usr/local/include/QtWidgets/qdialogbuttonbox.h
 
 CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o: mesh.cpp \
   mesh.h \
@@ -17209,6 +17212,12 @@ openglwidget.cpp:
 external/assimp/include/assimp/postprocess.h:
 
 mesh.cpp:
+
+/usr/local/include/QtWidgets/qdialogbuttonbox.h:
+
+/usr/local/lib/QtWidgets.framework/Headers/qmessagebox.h:
+
+/usr/local/lib/QtWidgets.framework/Headers/QMessageBox:
 
 /usr/local/lib/QtWidgets.framework/Headers/QWidgetAction:
 

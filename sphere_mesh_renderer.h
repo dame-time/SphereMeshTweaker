@@ -21,9 +21,19 @@ private:
     const glm::vec3 recentSelectSphereColor {0.5f, 0.5f, 0.8f};
 };
 
+struct PrysmTri
+{
+    glm::vec3 a;
+    glm::vec3 b;
+    glm::vec3 c;
+};
+
 class SphereMeshRenderer
 {
 public:
+    Shader* sphereShader;
+    Shader* meshShader;
+
     bool visible {};
     bool filled {};
 
@@ -34,27 +44,44 @@ public:
     SphereMeshRenderer(SphereMesh* referenceSM);
 
     void updateSphereMesh(SphereMesh* sm);
-    void useShader(Shader* shader);
 
     void render() const;
 
     void selectSphere(int i);
     void unselectSphere(int i);
 
+    void scale(float scale);
+
     void selectRecentSphere(int i);
     void unselectRecentSphere(int i);
 
+    std::string exportGeometryAsString() const;
+
 private:
     std::vector<RenderableSphere> renderableSpheres;
+    static std::vector<float> originalRadii;
+
+    std::vector<PrysmTri> tris;
 
     SphereMesh* sm;
-    Shader* sphereShader;
 
     void renderSphere(const glm::vec3& center, float radius, const glm::vec3& color) const;
 
     void renderSpheres() const;
     void renderConnectivity() const;
     void renderFull() const;
+
+    glm::vec3 computeUpperPlaneNormal(const Sphere &sa, const Sphere &sb, const Sphere &sc, int direction) const;
+
+    void regeneratePrysmoidGeometry();
+    void regenerateCapsuloidGeometry();
+    void renderCachedPrysmoids() const;
+    void renderCachedCapsuloids() const;
+
+    void renderTriangle(int index) const;
+    void renderPrysmoidCapsule(int index, const glm::vec3& color) const;
+    void renderCapsuloidCapsule(int index, const glm::vec3& color) const;
+    void renderCapsuleBetweenSpheres(int sphereIndex1, int sphereIndex2, const glm::vec3& color) const;
 
     void drawSpheresOverPrysmoid(int index) const;
     void drawSpheresOverCapsuloid(int index) const;

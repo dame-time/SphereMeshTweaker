@@ -92,6 +92,8 @@ private:
 
     void resetSelection();
 
+    void useShader(const Shader* shdr);
+
     QPoint initialMousePos;
     QPoint lastMousePos;
 

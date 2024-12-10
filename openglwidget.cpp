@@ -46,6 +46,7 @@ void OpenGLWidget::initializeGL() {
 
     mesh = new Mesh();
     mesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/assets/foot.obj");
+    // mesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Assets/Models/Triangle.obj");
     mesh->color = glm::vec3(1.0f, 0.0f, 1.0f);
     mesh->isVisible = true;
 
@@ -57,9 +58,11 @@ void OpenGLWidget::initializeGL() {
 
     sphereMesh = new SphereMesh();
     sphereMesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SMToMeshFitter/assets/foot.sm");
+    // sphereMesh->loadFromFile("/Users/davidepaollilo/Desktop/triangle.sm");
 
     smRenderer = new SphereMeshRenderer(sphereMesh);
-    smRenderer->useShader(sphereMeshShader);
+    smRenderer->sphereShader = sphereMeshShader;
+    smRenderer->meshShader = shader;
 
     camera.setTarget(mesh->getCenter());
     setFocus();
@@ -71,58 +74,37 @@ void checkOpenGLError() {
         qDebug() << "OpenGL error: " << err;
 }
 
+void OpenGLWidget::useShader(const Shader* shdr)
+{
+    shdr->use();
+    shdr->setMat4("model", glm::mat4(1.0f));
+    shdr->setMat4("view", camera.getViewMatrix());
+    shdr->setMat4("projection", camera.getOrthographicMatrix(width(), height(), 0.0001f, 100000.0f));
+    shdr->setVec3("material.ambient", mesh->color);
+    shdr->setVec3("material.diffuse", glm::vec3(0.9f, 0.9f, 0.9f));
+    shdr->setVec3("material.specular", glm::vec3(1.0f));
+    shdr->setFloat("material.shininess", 1);
+
+    shdr->setVec3("light.position", glm::vec3(-1.f, 1.f, 0.f));
+    shdr->setVec3("light.ambient", glm::vec3(.5f, .5f, .5f));
+    shdr->setVec3("light.diffuse", glm::vec3(0.3f, 0.3f, 0.3f));
+    shdr->setVec3("light.specular", glm::vec3(0.3f, 0.3f, 0.3f));
+}
+
 void OpenGLWidget::paintGL() {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if (smRenderer != nullptr) {
-        sphereMeshShader->use();
-        sphereMeshShader->setMat4("view", camera.getViewMatrix());
-        sphereMeshShader->setMat4("projection", camera.getOrthographicMatrix(width(), height(), 0.0001f, 100000.0f));
-        sphereMeshShader->setVec3("light.position", glm::vec3(-10.0f, 1.0f, 0.0f));
-        sphereMeshShader->setVec3("light.ambient", glm::vec3(.5f, .5f, .5f));
-        sphereMeshShader->setVec3("light.diffuse", glm::vec3(0.3f, 0.3f, 0.3f));
-        sphereMeshShader->setVec3("light.specular", glm::vec3(0.3f, 0.3f, 0.3f));
-        sphereMeshShader->setVec3("material.specular", glm::vec3(1.0f));
-        sphereMeshShader->setFloat("material.shininess", 1);
+    useShader(sphereMeshShader);
+    useShader(shader);
+
+    if (smRenderer != nullptr)
         smRenderer->render();
-    }
 
-    if (mesh != nullptr) {
-        shader->use();
-        shader->setMat4("model", glm::mat4(1.0f));
-        shader->setMat4("view", camera.getViewMatrix());
-        shader->setMat4("projection", camera.getOrthographicMatrix(width(), height(), 0.0001f, 100000.0f));
-        shader->setVec3("material.ambient", mesh->color);
-        shader->setVec3("material.diffuse", glm::vec3(0.9f, 0.9f, 0.9f));
-        shader->setVec3("material.specular", glm::vec3(1.0f));
-        shader->setFloat("material.shininess", 1);
+    useShader(shader);
 
-        shader->setVec3("light.position", glm::vec3(-1.f, 1.f, 0.f));
-        shader->setVec3("light.ambient", glm::vec3(.5f, .5f, .5f));
-        shader->setVec3("light.diffuse", glm::vec3(0.3f, 0.3f, 0.3f));
-        shader->setVec3("light.specular", glm::vec3(0.3f, 0.3f, 0.3f));
+    if (mesh != nullptr)
         mesh->render(true);
-    }
-
-    if (projectOnMesh != nullptr) {
-        shader->use();
-        shader->setMat4("model", glm::mat4(1.0f));
-        shader->setMat4("view", camera.getViewMatrix());
-        shader->setMat4("projection", camera.getOrthographicMatrix(width(), height(), 0.0001f, 100000.0f));
-        shader->setVec3("material.ambient", projectOnMesh->color);
-        shader->setVec3("material.diffuse", glm::vec3(0.9f, 0.9f, 0.9f));
-        shader->setVec3("material.specular", glm::vec3(1.0f));
-        shader->setFloat("material.shininess", 1);
-
-        shader->setVec3("light.position", glm::vec3(-1.f, 1.f, 0.f));
-        shader->setVec3("light.ambient", glm::vec3(.5f, .5f, .5f));
-        shader->setVec3("light.diffuse", glm::vec3(0.3f, 0.3f, 0.3f));
-        shader->setVec3("light.specular", glm::vec3(0.3f, 0.3f, 0.3f));
-        projectOnMesh->render(false);
-        shader->setVec3("material.ambient", {0.0f, 0.0f, 0.0f});
-        projectOnMesh->renderWireframe();
-    }
 
     checkOpenGLError();
 }
@@ -325,7 +307,7 @@ void OpenGLWidget::keyPressEvent(QKeyEvent* event) {
             sphereMeshShader->linkProgram();
 
             smRenderer = new SphereMeshRenderer(sphereMesh);
-            smRenderer->useShader(sphereMeshShader);
+            smRenderer->sphereShader = sphereMeshShader;
             update();
             break;
 
@@ -538,7 +520,8 @@ void OpenGLWidget::setSphereMesh(SphereMesh* newSphereMesh) {
     else
     {
         smRenderer = new SphereMeshRenderer(sphereMesh);
-        smRenderer->useShader(sphereMeshShader);
+        smRenderer->sphereShader = sphereMeshShader;
+        smRenderer->meshShader = shader;
     }
 
     update();

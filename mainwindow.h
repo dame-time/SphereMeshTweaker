@@ -44,5 +44,6 @@ private:
     void onLinkTri();
     void onUnlinkCap();
     void onUnlinkTri();
+    void onExportGeometry();
 };
 #endif // MAINWINDOW_H

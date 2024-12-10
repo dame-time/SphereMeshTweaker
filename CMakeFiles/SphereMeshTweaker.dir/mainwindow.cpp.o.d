@@ -1626,4 +1626,7 @@ CMakeFiles/SphereMeshTweaker.dir/mainwindow.cpp.o: \
   /usr/local/include/QtCore/qdir.h \
   /usr/local/include/QtWidgets/qdialog.h \
   /usr/local/lib/QtWidgets.framework/Headers/QWidgetAction \
-  /usr/local/lib/QtWidgets.framework/Headers/qwidgetaction.h
+  /usr/local/lib/QtWidgets.framework/Headers/qwidgetaction.h \
+  /usr/local/lib/QtWidgets.framework/Headers/QMessageBox \
+  /usr/local/lib/QtWidgets.framework/Headers/qmessagebox.h \
+  /usr/local/include/QtWidgets/qdialogbuttonbox.h
