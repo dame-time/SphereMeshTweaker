@@ -3896,7 +3896,36 @@ CMakeFiles/SphereMeshTweaker.dir/main.cpp.o: main.cpp \
   /usr/local/lib/QtCore.framework/Headers/QLocale \
   /usr/local/lib/QtCore.framework/Headers/qlocale.h \
   /usr/local/lib/QtCore.framework/Headers/QTranslator \
-  /usr/local/lib/QtCore.framework/Headers/qtranslator.h
+  /usr/local/lib/QtCore.framework/Headers/qtranslator.h \
+  /usr/local/lib/QtCore.framework/Headers/QCoreApplication \
+  /usr/local/lib/QtCore.framework/Headers/qcoreapplication.h \
+  /usr/local/lib/QtCore.framework/Headers/QDir \
+  /usr/local/lib/QtCore.framework/Headers/qdir.h \
+  /usr/local/include/QtCore/qfile.h \
+  /usr/local/include/QtCore/qfiledevice.h \
+  /usr/local/include/QtCore/qiodevice.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/filesystem \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/copy_options.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/directory_entry.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/file_status.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/file_type.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/perms.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/file_time_type.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/filesystem_error.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/path.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/iomanip \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/operations.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/perm_options.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/space_info.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/directory_iterator.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/directory_options.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/u8path.h \
+  /usr/local/include/QtCore/qfileinfo.h \
+  /usr/local/include/QtCore/qdatetime.h \
+  /usr/local/include/QtCore/qcalendar.h \
+  /usr/local/include/QtCore/qtimezone.h
 
 CMakeFiles/SphereMeshTweaker.dir/mainwindow.cpp.o: mainwindow.cpp \
   mainwindow.h \
@@ -6936,7 +6965,12 @@ CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o: mesh.cpp \
   /usr/local/include/QtCore/qvarlengtharray.h \
   /usr/local/include/QtCore/q23utility.h \
   /usr/local/include/QtGui/qopenglcontext_platform.h \
-  /usr/local/include/QtGui/qwindowdefs.h
+  /usr/local/include/QtGui/qwindowdefs.h \
+  /usr/local/lib/QtCore.framework/Headers/QTemporaryFile \
+  /usr/local/lib/QtCore.framework/Headers/qtemporaryfile.h \
+  /usr/local/include/QtCore/qiodevice.h \
+  /usr/local/include/QtCore/qfile.h \
+  /usr/local/include/QtCore/qfiledevice.h
 
 CMakeFiles/SphereMeshTweaker.dir/openglwidget.cpp.o: openglwidget.cpp \
   openglwidget.h \
@@ -8526,6 +8560,15 @@ CMakeFiles/SphereMeshTweaker.dir/openglwidget.cpp.o: openglwidget.cpp \
   /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLDebugLogger \
   /usr/local/lib/QtOpenGL.framework/Headers/qopengldebug.h \
   /usr/local/lib/QtGui.framework/Headers/QKeyEvent \
+  /usr/local/lib/QtCore.framework/Headers/QTemporaryFile \
+  /usr/local/lib/QtCore.framework/Headers/qtemporaryfile.h \
+  /usr/local/include/QtCore/qfile.h \
+  /usr/local/lib/QtCore.framework/Headers/QDir \
+  /usr/local/lib/QtCore.framework/Headers/qdir.h \
+  /usr/local/include/QtCore/qfileinfo.h \
+  /usr/local/include/QtCore/qdatetime.h \
+  /usr/local/include/QtCore/qcalendar.h \
+  /usr/local/include/QtCore/qtimezone.h \
   external/glm/glm/gtx/string_cast.hpp \
   external/glm/glm/glm.hpp \
   external/glm/glm/gtc/type_precision.hpp \
@@ -15928,6 +15971,41 @@ CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o: sphere_mesh_rendere
   external/glm/glm/mat4x3.hpp \
   external/glm/glm/mat4x4.hpp \
   external/glm/glm/gtc/type_ptr.inl \
+  mesh.h \
+  external/assimp/include/assimp/scene.h \
+  external/assimp/include/assimp/types.h \
+  external/assimp/include/assimp/defs.h \
+  external/assimp/include/assimp/config.h \
+  external/assimp/include/assimp/vector2.h \
+  external/assimp/include/assimp/vector3.h \
+  external/assimp/include/assimp/color4.h \
+  external/assimp/include/assimp/matrix3x3.h \
+  external/assimp/include/assimp/matrix4x4.h \
+  external/assimp/include/assimp/quaternion.h \
+  external/assimp/include/assimp/vector2.inl \
+  external/assimp/include/assimp/vector3.inl \
+  external/assimp/include/assimp/color4.inl \
+  external/assimp/include/assimp/matrix3x3.inl \
+  external/assimp/include/assimp/matrix4x4.inl \
+  external/assimp/include/assimp/MathFunctions.h \
+  external/assimp/include/assimp/quaternion.inl \
+  external/assimp/include/assimp/texture.h \
+  external/assimp/include/assimp/Compiler/pushpack1.h \
+  external/assimp/include/assimp/Compiler/poppack1.h \
+  external/assimp/include/assimp/mesh.h \
+  external/assimp/include/assimp/aabb.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/unordered_set \
+  external/assimp/include/assimp/light.h \
+  external/assimp/include/assimp/camera.h \
+  external/assimp/include/assimp/material.h \
+  external/assimp/include/assimp/material.inl \
+  external/assimp/include/assimp/anim.h \
+  external/assimp/include/assimp/metadata.h \
+  /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLVertexArrayObject \
+  /usr/local/lib/QtOpenGL.framework/Headers/qopenglvertexarrayobject.h \
+  /usr/local/include/QtCore/QObject \
+  /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLBuffer \
+  /usr/local/lib/QtOpenGL.framework/Headers/qopenglbuffer.h \
   external/glm/glm/gtc/matrix_transform.hpp \
   /usr/local/lib/QtGui.framework/Headers/QOpenGLFunctions \
   /usr/local/lib/QtGui.framework/Headers/qopenglfunctions.h \
@@ -15937,12 +16015,7 @@ CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o: sphere_mesh_rendere
   /usr/local/include/QtGui/qsurfaceformat.h \
   /usr/local/include/QtCore/qvariant.h \
   /usr/local/include/QtGui/qopenglcontext_platform.h \
-  /usr/local/include/QtGui/qwindowdefs.h \
-  /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLVertexArrayObject \
-  /usr/local/lib/QtOpenGL.framework/Headers/qopenglvertexarrayobject.h \
-  /usr/local/include/QtCore/QObject \
-  /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLBuffer \
-  /usr/local/lib/QtOpenGL.framework/Headers/qopenglbuffer.h
+  /usr/local/include/QtGui/qwindowdefs.h
 
 
 sphere_mesh_renderer.cpp:
@@ -15999,30 +16072,6 @@ mesh.cpp:
 
 /usr/local/lib/QtWidgets.framework/Headers/QCheckBox:
 
-/usr/local/include/QtCore/qfileinfo.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/path_iterator.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/space_info.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/perm_options.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/operations.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/iomanip:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/filesystem_error.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/file_time_type.h:
-
-/usr/local/lib/QtWidgets.framework/Headers/qmessagebox.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/perms.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/file_status.h:
-
-/usr/local/include/QtCore/qfile.h:
-
 /usr/local/lib/QtGui.framework/Headers/qicon.h:
 
 /usr/local/include/QtWidgets/qlayoutitem.h:
@@ -16051,6 +16100,30 @@ mesh.cpp:
 
 mainwindow.cpp:
 
+/usr/local/include/QtCore/qfileinfo.h:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/path_iterator.h:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/space_info.h:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/perm_options.h:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/operations.h:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/iomanip:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/filesystem_error.h:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/file_time_type.h:
+
+/usr/local/lib/QtWidgets.framework/Headers/qmessagebox.h:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/perms.h:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/file_status.h:
+
+/usr/local/include/QtCore/qfile.h:
+
 /usr/local/lib/QtCore.framework/Headers/qlocale.h:
 
 /usr/local/lib/QtGui.framework/Headers/qsurfaceformat.h:
@@ -16062,6 +16135,8 @@ main.cpp:
 external/SphereMeshBlendShape/include/sphere_mesh.h:
 
 /usr/local/lib/QtOpenGL.framework/Headers/qopenglvertexarrayobject.h:
+
+/usr/local/lib/QtCore.framework/Headers/qtemporaryfile.h:
 
 external/assimp/include/assimp/material.inl:
 
@@ -16617,9 +16692,9 @@ external/glm/glm/gtx/dual_quaternion.inl:
 
 /usr/local/include/QtCore/q20memory.h:
 
-/usr/local/include/QtCore/qtimezone.h:
-
 /usr/local/include/QtCore/QVariant:
+
+/usr/local/include/QtCore/qtimezone.h:
 
 /usr/local/include/QtCore/q20functional.h:
 
@@ -16702,6 +16777,8 @@ external/glm/glm/ext/quaternion_exponential.hpp:
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_u_int.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_u_short.h:
+
+/usr/local/lib/QtCore.framework/Headers/QCoreApplication:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/types.h:
 
@@ -17661,9 +17738,9 @@ external/glm/glm/ext/matrix_double4x4_precision.hpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__algorithm/is_sorted.h:
 
-/usr/local/lib/QtCore.framework/Headers/qdir.h:
-
 /usr/local/include/QtWidgets/qabstractbutton.h:
+
+/usr/local/lib/QtCore.framework/Headers/qdir.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__mutex/tag_types.h:
 
@@ -17740,6 +17817,8 @@ external/glm/glm/ext/vector_bool2.hpp:
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/errno.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__functional/binary_negate.h:
+
+/usr/local/lib/QtCore.framework/Headers/QTemporaryFile:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__algorithm/ranges_minmax.h:
 
@@ -18772,6 +18851,8 @@ external/glm/glm/detail/func_common.inl:
 external/glm/glm/ext/matrix_float2x3.hpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__algorithm/equal_range.h:
+
+/usr/local/lib/QtCore.framework/Headers/qcoreapplication.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__tuple/make_tuple_types.h:
 

@@ -4,9 +4,12 @@
 #include <QSurfaceFormat>
 #include <QLocale>
 #include <QTranslator>
+#include <QCoreApplication>
+#include <QDir>
 
 int main(int argc, char *argv[])
 {
+    QDir::setCurrent(QCoreApplication::applicationDirPath());
     QApplication a(argc, argv);
 
     QTranslator translator;

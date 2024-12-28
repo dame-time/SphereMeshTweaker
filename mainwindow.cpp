@@ -71,7 +71,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->spinBox->setMaximum(50);
 
     ui->horizontalSlider_2->setMinimum(0);
-    ui->spinBox_2->setMinimum(0.0);
+    ui->horizontalSlider_2->setMinimum(2);
+    ui->spinBox_2->setMinimum(0.1);
     ui->horizontalSlider_2->setMaximum(20);
     ui->spinBox_2->setMaximum(1.0);
 
@@ -158,6 +159,8 @@ void MainWindow::onSlider2ValueChanged(int value)
     else
         openGLWidget->smRenderer->sphereSize = (floatValue * 2);
 
+    openGLWidget->smRenderer->updateSphereMesh(openGLWidget->sphereMesh);
+
     ui->spinBox_2->setValue(floatValue);
 
     openGLWidget->update();
@@ -169,6 +172,7 @@ void MainWindow::onSizeLabelEditingFinished()
 
     // openGLWidget->smRenderer->connectivitySize = ui->spinBox_2->value();
     ui->horizontalSlider_2->setValue(value);
+    openGLWidget->smRenderer->updateSphereMesh(openGLWidget->sphereMesh);
 
     openGLWidget->update();
 }

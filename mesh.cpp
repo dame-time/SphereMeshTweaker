@@ -7,6 +7,7 @@
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLFunctions>
+#include <QTemporaryFile>
 
 Mesh::Mesh() : vao(new QOpenGLVertexArrayObject()), vbo(QOpenGLBuffer::VertexBuffer), ebo(QOpenGLBuffer::IndexBuffer) {
     vao->create();

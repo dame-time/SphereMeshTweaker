@@ -30,10 +30,45 @@ SphereMeshRenderer::SphereMeshRenderer(SphereMesh* referenceSM) : sm(referenceSM
 void SphereMeshRenderer::updateSphereMesh(SphereMesh* sm)
 {
     this->sm = sm;
-    renderableSpheres.clear();
 
-    for (int i = 0; i < sm->spheres.size(); i++)
-        renderableSpheres.push_back({});
+    renderableSpheres.clear();
+    renderableSpheres.resize(sm->spheres.size());
+
+    m_vertices.clear();
+    m_indices.clear();
+    m_subMeshes.clear();
+
+    SubMesh prysSub;
+    prysSub.indexOffset = m_indices.size();
+    prysSub.color = glm::vec3(0.8f, 0.5f, 0.3f);
+
+    for (int i = 0; i < sm->prysmoids.size(); i++)
+        buildPrysmoidGeometry(i, prysSub.color);
+
+    prysSub.indexCount = m_indices.size() - prysSub.indexOffset;
+    m_subMeshes.push_back(prysSub);
+
+    SubMesh quadSub;
+    quadSub.indexOffset = m_indices.size();
+    quadSub.color = glm::vec3(0.8f, 0.3f, 0.5f);
+
+    for (int i = 0; i < sm->quadrilaterals.size(); i++)
+        buildQuadGeometry(i, quadSub.color);
+
+    quadSub.indexCount = m_indices.size() - quadSub.indexOffset;
+    m_subMeshes.push_back(quadSub);
+
+    SubMesh capsSub;
+    capsSub.indexOffset = m_indices.size();
+    capsSub.color = glm::vec3(0.0f, 0.0f, 0.75f);
+
+    for (int i = 0; i < sm->capsuloids.size(); i++)
+        buildCapsuloidGeometry(i, capsSub.color);
+
+    capsSub.indexCount = m_indices.size() - capsSub.indexOffset;
+    m_subMeshes.push_back(capsSub);
+
+    uploadGeometryToGPU();
 }
 
 glm::vec3 SphereMeshRenderer::computeUpperPlaneNormal(const Sphere &sa, const Sphere &sb, const Sphere &sc, int direction) const
@@ -66,7 +101,7 @@ glm::vec3 SphereMeshRenderer::computeUpperPlaneNormal(const Sphere &sa, const Sp
     return n;
 }
 
-void SphereMeshRenderer::render() const
+void SphereMeshRenderer::render()
 {
     if (!visible)
         return;
@@ -76,7 +111,25 @@ void SphereMeshRenderer::render() const
     if (!filled)
         return;
 
-    renderFull();
+    m_VAO.bind();
+    meshShader->use();
+
+    for (auto &sub : m_subMeshes)
+    {
+        meshShader->setVec3("material.ambient",  sub.color);
+        meshShader->setVec3("material.diffuse",  sub.color);
+        meshShader->setVec3("material.specular", glm::vec3(0.1f, 0.1f, 0.1f));
+        meshShader->setFloat("material.shininess", 32.0f);
+
+        size_t offsetBytes = sub.indexOffset * sizeof(unsigned int);
+        glDrawElements(GL_TRIANGLES,
+                       static_cast<GLsizei>(sub.indexCount),
+                       GL_UNSIGNED_INT,
+                       reinterpret_cast<void*>(offsetBytes));
+    }
+
+    m_VAO.release();
+    glUseProgram(0);
 }
 
 void SphereMeshRenderer::selectSphere(int i)
@@ -103,287 +156,6 @@ void SphereMeshRenderer::renderSpheres() const
 {
     for(int i = 0; i < sm->spheres.size(); i++)
         renderSphere(sm->spheres[i].center, glm::mix(MIN_RADIUS, sm->spheres[i].radius, sphereSize), renderableSpheres[i].getColor());
-}
-
-void SphereMeshRenderer::renderConnectivity() const
-{
-    for (int i = 0; i < sm->prysmoids.size(); i++)
-        drawSpheresOverPrysmoid(i);
-
-    for (int i = 0; i < sm->capsuloids.size(); i++)
-        drawSpheresOverCapsuloid(i);
-}
-
-void SphereMeshRenderer::renderFull() const
-{
-    for (int i = 0; i < sm->quadrilaterals.size(); i++)
-    {
-        renderQuadCapsule(i, glm::vec3(0.75f, 0.75f, 0.0f));
-        renderTriangleQuad(i);
-    }
-
-    for (int i = 0; i < sm->prysmoids.size(); i++)
-    {
-        renderPrysmoidCapsule(i, glm::vec3(0.1f, 0.75f, 0.0f));
-        renderTriangle(i);
-    }
-
-    for (int i = 0; i < sm->capsuloids.size(); i++)
-        renderCapsuloidCapsule(i, glm::vec3(0.0f, 0.0f, 0.75f));
-}
-
-void SphereMeshRenderer::renderTriangle(int index) const {
-    const auto& prysmoid = sm->prysmoids[index];
-
-    const Sphere& s0 = sm->spheres[prysmoid.indices[0]];
-    const Sphere& s1 = sm->spheres[prysmoid.indices[1]];
-    const Sphere& s2 = sm->spheres[prysmoid.indices[2]];
-
-    glm::vec3 C1 = s0.center;
-    glm::vec3 C2 = s1.center;
-    glm::vec3 C3 = s2.center;
-
-    float R1 = glm::mix(MIN_RADIUS,s0.radius, connectivitySize);
-    float R2 = glm::mix(MIN_RADIUS,s1.radius, connectivitySize);
-    float R3 = glm::mix(MIN_RADIUS,s2.radius, connectivitySize);
-
-    glm::vec3 nTop = computeUpperPlaneNormal(s0, s1, s2, 1);
-    glm::vec3 nBottom = computeUpperPlaneNormal(s0,s1, s2, -1);
-
-    glm::vec3 V1_top = C1 + R1 * nTop;
-    glm::vec3 V2_top = C2 + R2 * nTop;
-    glm::vec3 V3_top = C3 + R3 * nTop;
-
-    glm::vec3 V1_bottom = C1 + R1 * nBottom;
-    glm::vec3 V2_bottom = C2 + R2 * nBottom;
-    glm::vec3 V3_bottom = C3 + R3 * nBottom;
-
-    static QOpenGLVertexArrayObject VAO;
-    static QOpenGLBuffer VBO(QOpenGLBuffer::VertexBuffer);
-    static bool isInitialized = false;
-
-    if (!isInitialized) {
-        VAO.create();
-        VBO.create();
-        isInitialized = true;
-    }
-
-    VAO.bind();
-    VBO.bind();
-
-    QOpenGLFunctions f;
-    f.initializeOpenGLFunctions();
-
-    meshShader->use();
-    meshShader->setVec3("material.ambient", glm::vec3(0.8f, 0.5f, 0.3f));
-    meshShader->setVec3("material.diffuse", glm::vec3(0.8f, 0.5f, 0.3f));
-    meshShader->setVec3("material.specular", glm::vec3(0.1f, 0.1f, 0.1f));
-    meshShader->setFloat("material.shininess", 32.0f);
-
-    glDisable(GL_CULL_FACE);
-    glDisable(GL_BLEND);
-    glEnable(GL_DEPTH_TEST);
-
-    std::vector<float> verticesTop = {
-        V1_top.x, V1_top.y, V1_top.z, nTop.x, nTop.y, nTop.z,
-        V2_top.x, V2_top.y, V2_top.z, nTop.x, nTop.y, nTop.z,
-        V3_top.x, V3_top.y, V3_top.z, nTop.x, nTop.y, nTop.z,
-    };
-    VBO.allocate(verticesTop.data(), verticesTop.size() * sizeof(float));
-    f.glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
-    f.glEnableVertexAttribArray(0);
-    f.glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-    f.glEnableVertexAttribArray(1);
-    f.glDrawArrays(GL_TRIANGLES, 0, 3);
-
-    VAO.release();
-    VBO.release();
-
-    VAO.bind();
-    VBO.bind();
-
-    std::vector<float> verticesBottom = {
-        V1_bottom.x, V1_bottom.y, V1_bottom.z, nBottom.x, nBottom.y, nBottom.z,
-        V2_bottom.x, V2_bottom.y, V2_bottom.z, nBottom.x, nBottom.y, nBottom.z,
-        V3_bottom.x, V3_bottom.y, V3_bottom.z, nBottom.x, nBottom.y, nBottom.z,
-    };
-    VBO.allocate(verticesBottom.data(), verticesBottom.size() * sizeof(float));
-    f.glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
-    f.glEnableVertexAttribArray(0);
-    f.glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-    f.glEnableVertexAttribArray(1);
-    f.glDrawArrays(GL_TRIANGLES, 0, 3);
-
-    VAO.release();
-    VBO.release();
-    glUseProgram(0);
-}
-
-void SphereMeshRenderer::renderTriangleQuad(int index) const
-{
-    const auto& quad = sm->quadrilaterals[index];
-
-    const Sphere& s0 = sm->spheres[quad.indices[0]];
-    const Sphere& s1 = sm->spheres[quad.indices[1]];
-    const Sphere& s2 = sm->spheres[quad.indices[2]];
-    const Sphere& s3 = sm->spheres[quad.indices[3]];
-
-    glm::vec3 C1 = s0.center;
-    glm::vec3 C2 = s1.center;
-    glm::vec3 C3 = s2.center;
-    glm::vec3 C4 = s3.center;
-
-    float R1 = glm::mix(MIN_RADIUS, s0.radius, connectivitySize);
-    float R2 = glm::mix(MIN_RADIUS, s1.radius, connectivitySize);
-    float R3 = glm::mix(MIN_RADIUS, s2.radius, connectivitySize);
-    float R4 = glm::mix(MIN_RADIUS, s3.radius, connectivitySize);
-
-    glm::vec3 nTop = computeUpperPlaneNormal(s0, s1, s2, 1);
-    glm::vec3 nBottom = computeUpperPlaneNormal(s0, s1, s2, -1);
-
-    glm::vec3 V1_top = C1 + R1 * nTop;
-    glm::vec3 V2_top = C2 + R2 * nTop;
-    glm::vec3 V3_top = C3 + R3 * nTop;
-    glm::vec3 V4_top = C4 + R4 * nTop;
-
-    glm::vec3 V1_bottom = C1 + R1 * nBottom;
-    glm::vec3 V2_bottom = C2 + R2 * nBottom;
-    glm::vec3 V3_bottom = C3 + R3 * nBottom;
-    glm::vec3 V4_bottom = C4 + R4 * nBottom;
-
-    static QOpenGLVertexArrayObject VAO;
-    static QOpenGLBuffer VBO(QOpenGLBuffer::VertexBuffer);
-    static bool isInitialized = false;
-
-    if (!isInitialized) {
-        VAO.create();
-        VBO.create();
-        isInitialized = true;
-    }
-
-    VAO.bind();
-    VBO.bind();
-
-    QOpenGLFunctions f;
-    f.initializeOpenGLFunctions();
-
-    meshShader->use();
-    meshShader->setVec3("material.ambient", glm::vec3(0.8f, 0.3f, 0.5f));
-    meshShader->setVec3("material.diffuse", glm::vec3(0.8f, 0.3f, 0.5f));
-    meshShader->setVec3("material.specular", glm::vec3(0.1f, 0.1f, 0.1f));
-    meshShader->setFloat("material.shininess", 32.0f);
-
-    glDisable(GL_CULL_FACE);
-    glDisable(GL_BLEND);
-    glEnable(GL_DEPTH_TEST);
-
-    // Top vertices for two triangles
-    std::vector<float> verticesTop = {
-        // First triangle: s0, s1, s2
-        V1_top.x, V1_top.y, V1_top.z, nTop.x, nTop.y, nTop.z,
-        V2_top.x, V2_top.y, V2_top.z, nTop.x, nTop.y, nTop.z,
-        V3_top.x, V3_top.y, V3_top.z, nTop.x, nTop.y, nTop.z,
-        // Second triangle: s2, s3, s0
-        V3_top.x, V3_top.y, V3_top.z, nTop.x, nTop.y, nTop.z,
-        V4_top.x, V4_top.y, V4_top.z, nTop.x, nTop.y, nTop.z,
-        V1_top.x, V1_top.y, V1_top.z, nTop.x, nTop.y, nTop.z,
-    };
-    VBO.allocate(verticesTop.data(), verticesTop.size() * sizeof(float));
-    f.glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
-    f.glEnableVertexAttribArray(0);
-    f.glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-    f.glEnableVertexAttribArray(1);
-    f.glDrawArrays(GL_TRIANGLES, 0, 6); // Two triangles = 6 vertices
-
-    VAO.release();
-    VBO.release();
-
-    VAO.bind();
-    VBO.bind();
-
-    // Bottom vertices for two triangles
-    std::vector<float> verticesBottom = {
-        // First triangle: s0, s1, s2
-        V1_bottom.x, V1_bottom.y, V1_bottom.z, nBottom.x, nBottom.y, nBottom.z,
-        V2_bottom.x, V2_bottom.y, V2_bottom.z, nBottom.x, nBottom.y, nBottom.z,
-        V3_bottom.x, V3_bottom.y, V3_bottom.z, nBottom.x, nBottom.y, nBottom.z,
-        // Second triangle: s2, s3, s0
-        V3_bottom.x, V3_bottom.y, V3_bottom.z, nBottom.x, nBottom.y, nBottom.z,
-        V4_bottom.x, V4_bottom.y, V4_bottom.z, nBottom.x, nBottom.y, nBottom.z,
-        V1_bottom.x, V1_bottom.y, V1_bottom.z, nBottom.x, nBottom.y, nBottom.z,
-    };
-    VBO.allocate(verticesBottom.data(), verticesBottom.size() * sizeof(float));
-    f.glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
-    f.glEnableVertexAttribArray(0);
-    f.glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-    f.glEnableVertexAttribArray(1);
-    f.glDrawArrays(GL_TRIANGLES, 0, 6); // Two triangles = 6 vertices
-
-    VAO.release();
-    VBO.release();
-    glUseProgram(0);
-}
-
-void SphereMeshRenderer::renderQuadCapsule(int index, const glm::vec3 &color) const
-{
-    const auto& prysmoid = sm->quadrilaterals[index];
-
-    for (int side = 0; side < 4; ++side) {
-        int sphereIndex1 = prysmoid.indices[side];
-        int sphereIndex2 = prysmoid.indices[(side + 1) % 4];
-
-        renderCapsuleBetweenSpheres(sphereIndex1, sphereIndex2, color);
-    }
-}
-
-void SphereMeshRenderer::drawSpheresOverPrysmoid(int index) const
-{
-    glm::vec3 color [3] = {glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)};
-    Prysmoid p = sm->prysmoids[index];
-
-    for (int i = 0; i < numberOfSpheres; i++)
-        for (int j = 0; j < numberOfSpheres - i; j++)
-        {
-            int k = numberOfSpheres - 1 - i - j;
-
-            // if (i == numberOfSpheres - 1 || j == numberOfSpheres - 1 || k == numberOfSpheres - 1) continue;
-
-            float ci = i * 1.0 / (numberOfSpheres - 1);
-            float cj = j * 1.0 / (numberOfSpheres - 1);
-            float ck = k * 1.0 / (numberOfSpheres - 1);
-
-            int dim = 2;
-            if (i == 0) dim--;
-            if (j == 0) dim--;
-            if (k == 0) dim--;
-
-            glm::vec3 origin = {sm->spheres[p.indices[0]].center * ci + sm->spheres[p.indices[1]].center * cj
-                                + sm->spheres[p.indices[2]].center * ck};
-            float radius = glm::mix(0.001f,
-                                        sm->spheres[p.indices[0]].radius * ci +
-                                        sm->spheres[p.indices[1]].radius * cj +
-                                        sm->spheres[p.indices[2]].radius * ck,
-                                    (float)connectivitySize);
-
-            renderSphere(origin, radius, color[dim]);
-        }
-}
-
-void SphereMeshRenderer::drawSpheresOverCapsuloid(int index) const
-{
-    const glm::vec3 color = glm::vec3(0.1, 0.7, 1);
-    Capsuloid c = sm->capsuloids[index];
-
-    for (int i = 1; i < numberOfSpheres - 1; i++)
-    {
-        renderSphere(glm::mix(sm->spheres[c.indices[0]].center, sm->spheres[c.indices[1]].center, i * 1.0 / (numberOfSpheres - 1)),
-                     glm::mix(
-                         0.001f,
-                         glm::mix(sm->spheres[c.indices[0]].radius, sm->spheres[c.indices[1]].radius, i * 1.0 / (numberOfSpheres - 1)),
-                         (float)connectivitySize
-                         ),
-                     color);
-    }
 }
 
 void SphereMeshRenderer::renderSphere(const glm::vec3& center, float radius, const glm::vec3& color) const
@@ -449,142 +221,6 @@ void SphereMeshRenderer::renderSphere(const glm::vec3& center, float radius, con
     glUseProgram(0);
 }
 
-void SphereMeshRenderer::renderPrysmoidCapsule(int index, const glm::vec3& color) const {
-    const auto& prysmoid = sm->prysmoids[index];
-
-    for (int side = 0; side < 3; ++side) {
-        int sphereIndex1 = prysmoid.indices[side];
-        int sphereIndex2 = prysmoid.indices[(side + 1) % 3];
-
-        renderCapsuleBetweenSpheres(sphereIndex1, sphereIndex2, color);
-    }
-}
-
-void SphereMeshRenderer::renderCapsuloidCapsule(int index, const glm::vec3& color) const {
-    const auto& capsuloid = sm->capsuloids[index];
-
-    renderCapsuleBetweenSpheres(capsuloid.indices[0], capsuloid.indices[1], color);
-}
-
-void SphereMeshRenderer::renderCapsuleBetweenSpheres(int sphereIndex1, int sphereIndex2, const glm::vec3& color) const {
-    const Sphere& s0 = sm->spheres[sphereIndex1];
-    const Sphere& s1 = sm->spheres[sphereIndex2];
-
-    glm::vec3 v0 = s0.center;
-    glm::vec3 v1 = s1.center;
-    float r0 = glm::mix(MIN_RADIUS, s0.radius, connectivitySize);
-    float r1 = glm::mix(MIN_RADIUS, s1.radius, connectivitySize);
-
-    if (r1 < r0) {
-        std::swap(v0, v1);
-        std::swap(r0, r1);
-    }
-
-    const int SEGMENTS = 32;
-
-    glm::vec3 d = v0 - v1;
-    float dLength = glm::length(d);
-
-    float l = std::sqrt(glm::dot(d, d) - std::pow(r1 - r0, 2));
-
-    float r0Bis = r0 * l / dLength;
-    float r1Bis = r1 * l / dLength;
-
-    float d0 = (r1 - r0) * r0 / dLength;
-    float d1 = (r1 - r0) * r1 / dLength;
-
-    glm::vec3 v0Bis = v0 + glm::normalize(d) * d0;
-    glm::vec3 v1Bis = v1 + glm::normalize(d) * d1;
-
-    glm::vec3 arbitrary = (glm::abs(d.x) < 0.99) ? glm::vec3(1.0f, 0.0f, 0.0f) : glm::vec3(0.0f, 1.0f, 0.0f);
-    glm::vec3 right = glm::normalize(glm::cross(d, arbitrary));
-    glm::vec3 up = glm::normalize(glm::cross(right, d));
-
-    std::vector<glm::vec3> circlePoints1;
-    std::vector<glm::vec3> circleNormals1;
-    std::vector<glm::vec3> circlePoints2;
-    std::vector<glm::vec3> circleNormals2;
-
-    for (int i = 0; i < SEGMENTS; ++i) {
-        float theta = (2.0f * M_PI * i) / SEGMENTS;
-
-        glm::vec3 offset1 = (right * cos(theta) + up * sin(theta)) * r0Bis;
-        circlePoints1.push_back(v0Bis + offset1);
-        circleNormals1.push_back(glm::normalize(offset1));
-
-        glm::vec3 offset2 = (right * cos(theta) + up * sin(theta)) * r1Bis;
-        circlePoints2.push_back(v1Bis + offset2);
-        circleNormals2.push_back(glm::normalize(offset2));
-    }
-
-    static QOpenGLVertexArrayObject VAO;
-    static QOpenGLBuffer VBO(QOpenGLBuffer::VertexBuffer);
-    static bool isInitialized = false;
-
-    if (!isInitialized) {
-        VAO.create();
-        VBO.create();
-        isInitialized = true;
-    }
-
-    VAO.bind();
-    VBO.bind();
-
-    QOpenGLFunctions f;
-    f.initializeOpenGLFunctions();
-
-    meshShader->use();
-    meshShader->setVec3("material.ambient", color);
-    meshShader->setVec3("material.diffuse", color);
-    meshShader->setVec3("material.specular", glm::vec3(0.1f, 0.1f, 0.1f));
-    meshShader->setFloat("material.shininess", 32.0f);
-
-    glDisable(GL_CULL_FACE);
-    glDisable(GL_BLEND);
-    glEnable(GL_DEPTH_TEST);
-
-    for (int i = 0; i < SEGMENTS; ++i) {
-        int nextIndex = (i + 1) % SEGMENTS;
-
-        std::vector<float> vertices1 = {
-            circlePoints1[i].x, circlePoints1[i].y, circlePoints1[i].z,
-            circleNormals1[i].x, circleNormals1[i].y, circleNormals1[i].z,
-
-            circlePoints2[i].x, circlePoints2[i].y, circlePoints2[i].z,
-            circleNormals2[i].x, circleNormals2[i].y, circleNormals2[i].z,
-
-            circlePoints1[nextIndex].x, circlePoints1[nextIndex].y, circlePoints1[nextIndex].z,
-            circleNormals1[nextIndex].x, circleNormals1[nextIndex].y, circleNormals1[nextIndex].z,
-        };
-        VBO.allocate(vertices1.data(), vertices1.size() * sizeof(float));
-        f.glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
-        f.glEnableVertexAttribArray(0);
-        f.glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-        f.glEnableVertexAttribArray(1);
-        f.glDrawArrays(GL_TRIANGLES, 0, 3);
-
-        std::vector<float> vertices2 = {
-            circlePoints2[i].x, circlePoints2[i].y, circlePoints2[i].z,
-            circleNormals2[i].x, circleNormals2[i].y, circleNormals2[i].z,
-
-            circlePoints2[nextIndex].x, circlePoints2[nextIndex].y, circlePoints2[nextIndex].z,
-            circleNormals2[nextIndex].x, circleNormals2[nextIndex].y, circleNormals2[nextIndex].z,
-
-            circlePoints1[nextIndex].x, circlePoints1[nextIndex].y, circlePoints1[nextIndex].z,
-            circleNormals1[nextIndex].x, circleNormals1[nextIndex].y, circleNormals1[nextIndex].z,
-        };
-        VBO.allocate(vertices2.data(), vertices2.size() * sizeof(float));
-        f.glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
-        f.glEnableVertexAttribArray(0);
-        f.glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-        f.glEnableVertexAttribArray(1);
-        f.glDrawArrays(GL_TRIANGLES, 0, 3);
-    }
-
-    VAO.release();
-    VBO.release();
-    glUseProgram(0);
-}
 
 int getOrAddMidpoint(int v1, int v2, std::vector<glm::vec3>& vertices,
                      std::unordered_map<std::pair<int, int>, int, hash_pair>& edgeMidpointCache,
@@ -683,7 +319,6 @@ std::string SphereMeshRenderer::exportGeometryAsString() const {
         std::vector<glm::vec3> circlePoints1;
         std::vector<glm::vec3> circlePoints2;
 
-        // Add vertices for the circumferences
         for (int i = 0; i < SEGMENTS; ++i) {
             float theta = (2.0f * M_PI * i) / SEGMENTS;
 
@@ -694,7 +329,6 @@ std::string SphereMeshRenderer::exportGeometryAsString() const {
             circlePoints2.push_back(v1Bis + offset2);
         }
 
-        // Add the center vertices for the spheres
         oss << "v " << v0.x << " " << v0.y << " " << v0.z << "\n";
         oss << "vn " << glm::normalize(v0 - v0).x << " " << glm::normalize(v0 - v0).y << " " << glm::normalize(v0 - v0).z << "\n";
         int v0CenterIndex = vertexOffset + 1;
@@ -705,7 +339,6 @@ std::string SphereMeshRenderer::exportGeometryAsString() const {
         int v1CenterIndex = vertexOffset + 1;
         vertexOffset++;
 
-        // Add the cylindrical part
         for (int i = 0; i < SEGMENTS; ++i) {
             int nextIndex = (i + 1) % SEGMENTS;
 
@@ -745,16 +378,13 @@ std::string SphereMeshRenderer::exportGeometryAsString() const {
             vertexOffset += 3;
         }
 
-        // Add cone faces linking circumferences to center vertices
         for (int i = 0; i < SEGMENTS; ++i) {
             int nextIndex = (i + 1) % SEGMENTS;
 
-            // Top cone
             oss << "f " << v0CenterIndex << "//" << v0CenterIndex << " "
                 << vertexOffset + 1 + i << "//" << vertexOffset + 1 + i << " "
                 << vertexOffset + 1 + nextIndex << "//" << vertexOffset + 1 + nextIndex << "\n";
 
-            // Bottom cone
             oss << "f " << v1CenterIndex << "//" << v1CenterIndex << " "
                 << vertexOffset + SEGMENTS + i + 1 << "//" << vertexOffset + SEGMENTS + i + 1 << " "
                 << vertexOffset + SEGMENTS + nextIndex + 1 << "//" << vertexOffset + SEGMENTS + nextIndex + 1 << "\n";
@@ -853,4 +483,209 @@ std::string SphereMeshRenderer::exportGeometryAsString() const {
     }
 
     return oss.str();
+}
+
+void SphereMeshRenderer::appendTriangle(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3,
+                                        const glm::vec3& n1, const glm::vec3& n2, const glm::vec3& n3)
+{
+    unsigned int startIndex = static_cast<unsigned int>(m_vertices.size());
+
+    m_vertices.push_back(Vertex{p1, n1});
+    m_vertices.push_back(Vertex{p2, n2});
+    m_vertices.push_back(Vertex{p3, n3});
+
+    m_indices.push_back(startIndex + 0);
+    m_indices.push_back(startIndex + 1);
+    m_indices.push_back(startIndex + 2);
+}
+
+void SphereMeshRenderer::buildPrysmoidGeometry(int index, const glm::vec3 &color)
+{
+    const auto& prysmoid = sm->prysmoids[index];
+
+    const Sphere& s0 = sm->spheres[prysmoid.indices[0]];
+    const Sphere& s1 = sm->spheres[prysmoid.indices[1]];
+    const Sphere& s2 = sm->spheres[prysmoid.indices[2]];
+
+    glm::vec3 C1 = s0.center;
+    glm::vec3 C2 = s1.center;
+    glm::vec3 C3 = s2.center;
+
+    float R1 = glm::mix(MIN_RADIUS, s0.radius, connectivitySize);
+    float R2 = glm::mix(MIN_RADIUS, s1.radius, connectivitySize);
+    float R3 = glm::mix(MIN_RADIUS, s2.radius, connectivitySize);
+
+    glm::vec3 nTop    = computeUpperPlaneNormal(s0, s1, s2,  1);
+    glm::vec3 nBottom = computeUpperPlaneNormal(s0, s1, s2, -1);
+
+    glm::vec3 V1_top = C1 + R1 * nTop;
+    glm::vec3 V2_top = C2 + R2 * nTop;
+    glm::vec3 V3_top = C3 + R3 * nTop;
+    glm::vec3 V1_bottom = C1 + R1 * nBottom;
+    glm::vec3 V2_bottom = C2 + R2 * nBottom;
+    glm::vec3 V3_bottom = C3 + R3 * nBottom;
+
+    appendTriangle(V1_top, V2_top, V3_top, nTop, nTop, nTop);
+    appendTriangle(V1_bottom, V2_bottom, V3_bottom, nBottom, nBottom, nBottom);
+
+    buildCapsuleBetweenSpheres(prysmoid.indices[0], prysmoid.indices[1], color);
+    buildCapsuleBetweenSpheres(prysmoid.indices[1], prysmoid.indices[2], color);
+    buildCapsuleBetweenSpheres(prysmoid.indices[2], prysmoid.indices[0], color);
+}
+
+void SphereMeshRenderer::buildQuadGeometry(int index, const glm::vec3 &color)
+{
+    const auto& quad = sm->quadrilaterals[index];
+
+    const Sphere& s0 = sm->spheres[quad.indices[0]];
+    const Sphere& s1 = sm->spheres[quad.indices[1]];
+    const Sphere& s2 = sm->spheres[quad.indices[2]];
+    const Sphere& s3 = sm->spheres[quad.indices[3]];
+
+    glm::vec3 C1 = s0.center;
+    glm::vec3 C2 = s1.center;
+    glm::vec3 C3 = s2.center;
+    glm::vec3 C4 = s3.center;
+
+    float R1 = glm::mix(MIN_RADIUS, s0.radius, connectivitySize);
+    float R2 = glm::mix(MIN_RADIUS, s1.radius, connectivitySize);
+    float R3 = glm::mix(MIN_RADIUS, s2.radius, connectivitySize);
+    float R4 = glm::mix(MIN_RADIUS, s3.radius, connectivitySize);
+
+    glm::vec3 nTop    = computeUpperPlaneNormal(s0, s1, s2,  1);
+    glm::vec3 nBottom = computeUpperPlaneNormal(s0, s1, s2, -1);
+
+    glm::vec3 V1_top = C1 + R1 * nTop;
+    glm::vec3 V2_top = C2 + R2 * nTop;
+    glm::vec3 V3_top = C3 + R3 * nTop;
+    glm::vec3 V4_top = C4 + R4 * nTop;
+
+    glm::vec3 V1_bottom = C1 + R1 * nBottom;
+    glm::vec3 V2_bottom = C2 + R2 * nBottom;
+    glm::vec3 V3_bottom = C3 + R3 * nBottom;
+    glm::vec3 V4_bottom = C4 + R4 * nBottom;
+
+    appendTriangle(V1_top, V2_top, V3_top, nTop, nTop, nTop);
+    appendTriangle(V3_top, V4_top, V1_top, nTop, nTop, nTop);
+
+    appendTriangle(V1_bottom, V2_bottom, V3_bottom, nBottom, nBottom, nBottom);
+    appendTriangle(V3_bottom, V4_bottom, V1_bottom, nBottom, nBottom, nBottom);
+
+    buildCapsuleBetweenSpheres(quad.indices[0], quad.indices[1], color);
+    buildCapsuleBetweenSpheres(quad.indices[1], quad.indices[2], color);
+    buildCapsuleBetweenSpheres(quad.indices[2], quad.indices[3], color);
+    buildCapsuleBetweenSpheres(quad.indices[3], quad.indices[0], color);
+}
+
+void SphereMeshRenderer::buildCapsuleBetweenSpheres(int sphereIndex1, int sphereIndex2,
+                                                    const glm::vec3& color)
+{
+    const Sphere& s0 = sm->spheres[sphereIndex1];
+    const Sphere& s1 = sm->spheres[sphereIndex2];
+
+    glm::vec3 v0 = s0.center;
+    glm::vec3 v1 = s1.center;
+    float r0 = glm::mix(MIN_RADIUS, s0.radius, connectivitySize);
+    float r1 = glm::mix(MIN_RADIUS, s1.radius, connectivitySize);
+
+    if (r1 < r0) {
+        std::swap(v0, v1);
+        std::swap(r0, r1);
+    }
+
+    const int SEGMENTS = 32;
+    glm::vec3 d = v0 - v1;
+    float dLength = glm::length(d);
+
+    float l = sqrt(glm::dot(d, d) - (r1 - r0)*(r1 - r0));
+
+    float r0Bis = r0 * (l / dLength);
+    float r1Bis = r1 * (l / dLength);
+
+    float d0 = (r1 - r0)*(r0/dLength);
+    float d1 = (r1 - r0)*(r1/dLength);
+
+    glm::vec3 v0Bis = v0 + glm::normalize(d)*d0;
+    glm::vec3 v1Bis = v1 + glm::normalize(d)*d1;
+
+    glm::vec3 arbitrary = (fabs(d.x) < 0.99f) ? glm::vec3(1.0f, 0.0f, 0.0f)
+                                              : glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 right = glm::normalize(glm::cross(d, arbitrary));
+    glm::vec3 up    = glm::normalize(glm::cross(right, d));
+
+    std::vector<glm::vec3> circle1(SEGMENTS), circle2(SEGMENTS);
+    std::vector<glm::vec3> normal1(SEGMENTS), normal2(SEGMENTS);
+
+    for (int i = 0; i < SEGMENTS; ++i) {
+        float theta = 2.0f * M_PI * float(i) / float(SEGMENTS);
+
+        glm::vec3 offset1 = (right * cos(theta) + up * sin(theta)) * r0Bis;
+        circle1[i] = v0Bis + offset1;
+        normal1[i] = glm::normalize(offset1);
+
+        glm::vec3 offset2 = (right * cos(theta) + up * sin(theta)) * r1Bis;
+        circle2[i] = v1Bis + offset2;
+        normal2[i] = glm::normalize(offset2);
+    }
+
+    for (int i = 0; i < SEGMENTS; ++i) {
+        int next = (i + 1) % SEGMENTS;
+
+        glm::vec3 p1 = circle1[i];
+        glm::vec3 p2 = circle2[i];
+        glm::vec3 p3 = circle1[next];
+        glm::vec3 p4 = circle2[next];
+
+        glm::vec3 n1 = normal1[i];
+        glm::vec3 n2 = normal2[i];
+        glm::vec3 n3 = normal1[next];
+        glm::vec3 n4 = normal2[next];
+
+        appendTriangle(p1, p2, p3, n1, n2, n3);
+        appendTriangle(p2, p4, p3, n2, n4, n3);
+    }
+}
+
+void SphereMeshRenderer::buildCapsuloidGeometry(int index, const glm::vec3 &color)
+{
+    const auto &caps = sm->capsuloids[index];
+
+    buildCapsuleBetweenSpheres(caps.indices[0], caps.indices[1], color);
+}
+
+void SphereMeshRenderer::uploadGeometryToGPU()
+{
+    if (!m_VAO.isCreated()) {
+        m_VAO.create();
+    }
+    m_VAO.bind();
+
+    if (!m_VBO.isCreated()) {
+        m_VBO.create();
+    }
+    m_VBO.bind();
+    m_VBO.allocate(m_vertices.data(),
+                   static_cast<int>(m_vertices.size() * sizeof(Vertex)));
+
+    if (!m_EBO.isCreated()) {
+        m_EBO.create();
+    }
+    m_EBO.bind();
+    m_EBO.allocate(m_indices.data(),
+                   static_cast<int>(m_indices.size() * sizeof(unsigned int)));
+
+    QOpenGLFunctions f;
+    f.initializeOpenGLFunctions();
+
+    f.glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+                            reinterpret_cast<void*>(offsetof(Vertex, position)));
+    f.glEnableVertexAttribArray(0);
+
+    f.glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+                            reinterpret_cast<void*>(offsetof(Vertex, normal)));
+    f.glEnableVertexAttribArray(1);
+
+    m_VAO.release();
+    m_VBO.release();
+    m_EBO.release();
 }

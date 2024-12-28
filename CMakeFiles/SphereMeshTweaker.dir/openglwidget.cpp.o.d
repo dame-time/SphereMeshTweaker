@@ -1571,6 +1571,15 @@ CMakeFiles/SphereMeshTweaker.dir/openglwidget.cpp.o: \
   /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLDebugLogger \
   /usr/local/lib/QtOpenGL.framework/Headers/qopengldebug.h \
   /usr/local/lib/QtGui.framework/Headers/QKeyEvent \
+  /usr/local/lib/QtCore.framework/Headers/QTemporaryFile \
+  /usr/local/lib/QtCore.framework/Headers/qtemporaryfile.h \
+  /usr/local/include/QtCore/qfile.h \
+  /usr/local/lib/QtCore.framework/Headers/QDir \
+  /usr/local/lib/QtCore.framework/Headers/qdir.h \
+  /usr/local/include/QtCore/qfileinfo.h \
+  /usr/local/include/QtCore/qdatetime.h \
+  /usr/local/include/QtCore/qcalendar.h \
+  /usr/local/include/QtCore/qtimezone.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/glm/glm/gtx/string_cast.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/glm/glm/gtx/../glm.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/glm/glm/gtx/../gtc/type_precision.hpp \

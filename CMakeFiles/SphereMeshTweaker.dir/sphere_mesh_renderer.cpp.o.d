@@ -1452,6 +1452,41 @@ CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o: \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/glm/glm/gtc/../mat4x3.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/glm/glm/gtc/../mat4x4.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/glm/glm/gtc/type_ptr.inl \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/mesh.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/scene.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/types.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/defs.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/config.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/vector2.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/vector3.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/color4.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/matrix3x3.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/matrix4x4.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/quaternion.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/vector2.inl \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/vector3.inl \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/color4.inl \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/matrix3x3.inl \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/matrix4x4.inl \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/MathFunctions.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/quaternion.inl \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/texture.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/./Compiler/pushpack1.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/./Compiler/poppack1.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/mesh.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/aabb.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/unordered_set \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/light.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/camera.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/material.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/material.inl \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/anim.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/metadata.h \
+  /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLVertexArrayObject \
+  /usr/local/lib/QtOpenGL.framework/Headers/qopenglvertexarrayobject.h \
+  /usr/local/include/QtCore/QObject \
+  /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLBuffer \
+  /usr/local/lib/QtOpenGL.framework/Headers/qopenglbuffer.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/glm/glm/gtc/matrix_transform.hpp \
   /usr/local/lib/QtGui.framework/Headers/QOpenGLFunctions \
   /usr/local/lib/QtGui.framework/Headers/qopenglfunctions.h \
@@ -1461,9 +1496,4 @@ CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o: \
   /usr/local/include/QtGui/qsurfaceformat.h \
   /usr/local/include/QtCore/qvariant.h \
   /usr/local/include/QtGui/qopenglcontext_platform.h \
-  /usr/local/include/QtGui/qwindowdefs.h \
-  /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLVertexArrayObject \
-  /usr/local/lib/QtOpenGL.framework/Headers/qopenglvertexarrayobject.h \
-  /usr/local/include/QtCore/QObject \
-  /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLBuffer \
-  /usr/local/lib/QtOpenGL.framework/Headers/qopenglbuffer.h
+  /usr/local/include/QtGui/qwindowdefs.h

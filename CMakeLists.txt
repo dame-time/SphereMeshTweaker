@@ -33,6 +33,8 @@ add_subdirectory(${GLM_DIR})
 add_subdirectory(${ASSIMP_DIR})
 add_subdirectory(external/SphereMeshBlendShape)
 
+file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
+
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp

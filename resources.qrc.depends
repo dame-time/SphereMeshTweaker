@@ -9,5 +9,7 @@
         <file>shaders/fragment.frag</file>
 	<file>shaders/impostor.vert</file>
         <file>shaders/impostor.frag</file>
+        <file>assets/foot.obj</file>
+	<file>assets/footS06.sm</file>
     </qresource>
 </RCC>

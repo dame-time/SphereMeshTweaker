@@ -1385,4 +1385,9 @@ CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o: \
   /usr/local/include/QtCore/qvarlengtharray.h \
   /usr/local/include/QtCore/q23utility.h \
   /usr/local/include/QtGui/qopenglcontext_platform.h \
-  /usr/local/include/QtGui/qwindowdefs.h
+  /usr/local/include/QtGui/qwindowdefs.h \
+  /usr/local/lib/QtCore.framework/Headers/QTemporaryFile \
+  /usr/local/lib/QtCore.framework/Headers/qtemporaryfile.h \
+  /usr/local/include/QtCore/qiodevice.h \
+  /usr/local/include/QtCore/qfile.h \
+  /usr/local/include/QtCore/qfiledevice.h

@@ -48,6 +48,12 @@ ASSIMP_BUILD_DRACO:BOOL=OFF
 //Build package as Mac OS X Framework bundle.
 ASSIMP_BUILD_FRAMEWORK:BOOL=OFF
 
+//Enable M3D file export
+ASSIMP_BUILD_M3D_EXPORTER:BOOL=OFF
+
+//Enable M3D file import
+ASSIMP_BUILD_M3D_IMPORTER:BOOL=OFF
+
 //Build the C4D importer, which relies on the non-free Cineware
 // SDK.
 ASSIMP_BUILD_NONFREE_C4D_IMPORTER:BOOL=OFF

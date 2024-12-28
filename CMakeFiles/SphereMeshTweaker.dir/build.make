@@ -79,6 +79,8 @@ qrc_resources.cpp: shaders/vertex.vert
 qrc_resources.cpp: shaders/fragment.frag
 qrc_resources.cpp: shaders/impostor.vert
 qrc_resources.cpp: shaders/impostor.frag
+qrc_resources.cpp: assets/foot.obj
+qrc_resources.cpp: assets/footS06.sm
 qrc_resources.cpp: resources.qrc.depends
 qrc_resources.cpp: /usr/local/share/qt/libexec/rcc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating qrc_resources.cpp"

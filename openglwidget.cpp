@@ -5,6 +5,8 @@
 #include <QFile>
 #include <QOpenGLDebugLogger>
 #include <QKeyEvent>
+#include <QTemporaryFile>
+#include <QDir>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #define MAX_STORED_UNDO_OPERATIONS 5000
@@ -45,19 +47,19 @@ void OpenGLWidget::initializeGL() {
     sphereMeshShader->linkProgram();
 
     mesh = new Mesh();
-    mesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/assets/foot.obj");
+    mesh->loadFromFile(QDir::currentPath().toStdString() + "/assets/foot.obj");
     // mesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Assets/Models/Triangle.obj");
     mesh->color = glm::vec3(1.0f, 0.0f, 1.0f);
     mesh->isVisible = true;
 
     projectOnMesh = new Mesh();
-    projectOnMesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/assets/foot.obj");
+    projectOnMesh->loadFromFile(QDir::currentPath().toStdString() + "/assets/foot.obj");
     projectOnMesh->color = glm::vec3(0.5f, 0.5f, 0.5f);
     projectOnMesh->isWireframe = true;
     projectOnMesh->isVisible = false;
 
     sphereMesh = new SphereMesh();
-    sphereMesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SMToMeshFitter/assets/footS06.sm");
+    sphereMesh->loadFromFile((QDir::currentPath().toStdString() + "/assets/footS06.sm").c_str());
     // sphereMesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/assets/triTest.sm");
     // sphereMesh->loadFromFile("/Users/davidepaollilo/Desktop/triangle.sm");
 
@@ -180,7 +182,9 @@ void OpenGLWidget::mouseMoveEvent(QMouseEvent *event) {
                 saveState();
                 stateSaved = true;
             }
+
             scaleSelectedSphere(currentPos);
+            smRenderer->updateSphereMesh(this->sphereMesh);
         }
 
         if (dragging)
@@ -190,6 +194,7 @@ void OpenGLWidget::mouseMoveEvent(QMouseEvent *event) {
                 stateSaved = true;
             }
             translateSelectedSphere(currentPos);
+            smRenderer->updateSphereMesh(this->sphereMesh);
         }
 
         return;
@@ -276,6 +281,7 @@ void OpenGLWidget::keyPressEvent(QKeyEvent* event) {
     {
         case Qt::Key_1:
             sphereMesh->generateQuadrilateral(0.4f);
+            smRenderer->updateSphereMesh(this->sphereMesh);
             update();
             break;
 
