@@ -153,10 +153,10 @@ void MainWindow::onSlider2ValueChanged(int value)
     if (floatValue >= 0.5f)
     {
         openGLWidget->smRenderer->connectivitySize = std::clamp(2 * (floatValue - 0.5f), 0.05f, 1.0f);
-        openGLWidget->smRenderer->scale(1.0f);
+        openGLWidget->smRenderer->sphereSize = 1.0f;
     }
     else
-        openGLWidget->smRenderer->scale(floatValue * 2);
+        openGLWidget->smRenderer->sphereSize = (floatValue * 2);
 
     ui->spinBox_2->setValue(floatValue);
 

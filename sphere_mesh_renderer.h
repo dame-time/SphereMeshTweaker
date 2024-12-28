@@ -50,8 +50,6 @@ public:
     void selectSphere(int i);
     void unselectSphere(int i);
 
-    void scale(float scale);
-
     void selectRecentSphere(int i);
     void unselectRecentSphere(int i);
 
@@ -59,7 +57,6 @@ public:
 
 private:
     std::vector<RenderableSphere> renderableSpheres;
-    static std::vector<float> originalRadii;
 
     std::vector<PrysmTri> tris;
 
@@ -79,6 +76,8 @@ private:
     void renderCachedCapsuloids() const;
 
     void renderTriangle(int index) const;
+    void renderTriangleQuad(int index) const;
+    void renderQuadCapsule(int index, const glm::vec3& color) const;
     void renderPrysmoidCapsule(int index, const glm::vec3& color) const;
     void renderCapsuloidCapsule(int index, const glm::vec3& color) const;
     void renderCapsuleBetweenSpheres(int sphereIndex1, int sphereIndex2, const glm::vec3& color) const;

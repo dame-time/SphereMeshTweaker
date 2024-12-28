@@ -449,6 +449,18 @@
 	"HEADERS" : 
 	[
 		[
+			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumper_graph.h",
+			"MU",
+			"EWIEGA46WW/moc_bumper_graph.cpp",
+			null
+		],
+		[
+			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumper_grid.h",
+			"MU",
+			"EWIEGA46WW/moc_bumper_grid.cpp",
+			null
+		],
+		[
 			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/camera.h",
 			"MU",
 			"EWIEGA46WW/moc_camera.cpp",
@@ -552,9 +564,9 @@
 		"/usr/local/lib/QtOpenGLWidgets.framework",
 		"/usr/local/lib/QtOpenGL.framework/Headers",
 		"/usr/local/lib/QtOpenGL.framework",
-		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk/usr/include/c++/v1",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1",
 		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include",
-		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk/usr/include",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include",
 		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"
 	],
 	"MOC_MACRO_NAMES" : 
@@ -592,6 +604,16 @@
 	"SETTINGS_FILE" : "/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles/SphereMeshTweaker_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumer_grid.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumper_graph.cpp",
+			"MU",
+			null
+		],
 		[
 			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/camera.cpp",
 			"MU",

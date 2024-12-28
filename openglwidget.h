@@ -94,6 +94,8 @@ private:
 
     void useShader(const Shader* shdr);
 
+    void fuse0123();
+
     QPoint initialMousePos;
     QPoint lastMousePos;
 

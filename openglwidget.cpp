@@ -57,7 +57,8 @@ void OpenGLWidget::initializeGL() {
     projectOnMesh->isVisible = false;
 
     sphereMesh = new SphereMesh();
-    sphereMesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SMToMeshFitter/assets/foot.sm");
+    sphereMesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SMToMeshFitter/assets/footS06.sm");
+    // sphereMesh->loadFromFile("/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/assets/triTest.sm");
     // sphereMesh->loadFromFile("/Users/davidepaollilo/Desktop/triangle.sm");
 
     smRenderer = new SphereMeshRenderer(sphereMesh);
@@ -65,6 +66,7 @@ void OpenGLWidget::initializeGL() {
     smRenderer->meshShader = shader;
 
     camera.setTarget(mesh->getCenter());
+
     setFocus();
 }
 
@@ -272,6 +274,11 @@ void OpenGLWidget::keyPressEvent(QKeyEvent* event) {
 
     switch (event->key())
     {
+        case Qt::Key_1:
+            sphereMesh->generateQuadrilateral(0.4f);
+            update();
+            break;
+
         case Qt::Key_R:
             camera.resetRotation();
             update();
@@ -392,7 +399,14 @@ void OpenGLWidget::scaleSelectedSphere(const QPoint& currentPos) {
 
     scaleAmount = glm::max(0.1f, scaleAmount);
     sphereMesh->spheres[selectedSphere].radius *= scaleAmount;
-    sphereMesh->spheres[selectedSphere].radius = glm::max(0.1f, sphereMesh->spheres[selectedSphere].radius);
+    // sphereMesh->spheres[selectedSphere].radius = glm::max(0.1f, sphereMesh->spheres[selectedSphere].radius);
+
+    if (sphereMesh->isSphereInQuadrilateral(selectedSphere))
+        for (int idx : sphereMesh->getSymmetricalSpheres(selectedSphere))
+        {
+            sphereMesh->spheres[idx].radius /= scaleAmount;
+            // sphereMesh->spheres[idx].radius = glm::max(0.1f, sphereMesh->spheres[selectedSphere].radius);
+        }
 
     initialMousePos = currentPos;
     update();
@@ -541,6 +555,9 @@ void OpenGLWidget::translateSelectedSphere(const QPoint& currentPos)
                            - glm::unProject(glm::vec3(clickPos.x, clickPos.y, clickPos.z), view, projection, viewportVec);
 
     sphereMesh->spheres[selectedSphere].center += deltaWorld;
+    if (sphereMesh->isSphereInQuadrilateral(selectedSphere))
+        for (int idx : sphereMesh->getSymmetricalSpheres(selectedSphere))
+            sphereMesh->spheres[idx].center -= deltaWorld;
     posUnderMouse += deltaWorld;
 
     update();

@@ -9,6 +9,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/SphereMeshTweaker_autogen/mocs_compilation.cpp" "CMakeFiles/SphereMeshTweaker.dir/SphereMeshTweaker_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/SphereMeshTweaker.dir/SphereMeshTweaker_autogen/mocs_compilation.cpp.o.d"
+  "/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumer_grid.cpp" "CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o" "gcc" "CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o.d"
+  "/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumper_graph.cpp" "CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o" "gcc" "CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o.d"
   "/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/camera.cpp" "CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o" "gcc" "CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o.d"
   "/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/main.cpp" "CMakeFiles/SphereMeshTweaker.dir/main.cpp.o" "gcc" "CMakeFiles/SphereMeshTweaker.dir/main.cpp.o.d"
   "/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/mainwindow.cpp" "CMakeFiles/SphereMeshTweaker.dir/mainwindow.cpp.o" "gcc" "CMakeFiles/SphereMeshTweaker.dir/mainwindow.cpp.o.d"

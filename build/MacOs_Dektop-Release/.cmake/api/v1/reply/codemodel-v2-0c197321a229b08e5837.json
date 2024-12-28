@@ -1,0 +1,262 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-272fe59320066aae0442.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				},
+				{
+					"build" : "external/glm",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-external.glm-Release-a6dc993d5209625b6587.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "external/glm"
+				},
+				{
+					"build" : "external/glm/glm",
+					"jsonFile" : "directory-external.glm.glm-Release-32a2ad45a04345e60681.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "external/glm/glm",
+					"targetIndexes" : 
+					[
+						4,
+						5
+					]
+				},
+				{
+					"build" : "external/assimp",
+					"childIndexes" : 
+					[
+						4,
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-external.assimp-Release-a94ca27478642ac43147.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "external/assimp",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "external/assimp/code",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-external.assimp.code-Release-51e77ba8f46918cdd397.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 2,
+					"source" : "external/assimp/code",
+					"targetIndexes" : 
+					[
+						2,
+						3
+					]
+				},
+				{
+					"build" : "external/assimp/test",
+					"childIndexes" : 
+					[
+						6
+					],
+					"jsonFile" : "directory-external.assimp.test-Release-e8ef53d6c457bd3eb309.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 2,
+					"source" : "external/assimp/test",
+					"targetIndexes" : 
+					[
+						7,
+						8
+					]
+				},
+				{
+					"build" : "external/assimp/test/headercheck",
+					"jsonFile" : "directory-external.assimp.test.headercheck-Release-55667fb3fd35c462ee55.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 2,
+					"source" : "external/assimp/test/headercheck"
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SphereMeshTweaker",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1,
+						2
+					],
+					"name" : "glm",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4,
+						5
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3,
+						4,
+						5,
+						6
+					],
+					"name" : "Assimp",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						6,
+						7,
+						8
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SphereMeshTweaker::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SphereMeshTweaker-Release-dc030f56098b07549490.json",
+					"name" : "SphereMeshTweaker",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SphereMeshTweaker_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SphereMeshTweaker_autogen-Release-8ca9b18371b167373430.json",
+					"name" : "SphereMeshTweaker_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "assimp::@f3a6284ec5dbac1d6aa0",
+					"jsonFile" : "target-assimp-Release-666cfba73585a9213a69.json",
+					"name" : "assimp",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "assimp_autogen::@f3a6284ec5dbac1d6aa0",
+					"jsonFile" : "target-assimp_autogen-Release-2762720117a98a7d4c53.json",
+					"name" : "assimp_autogen",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "glm::@d090a432591bc19a3a56",
+					"jsonFile" : "target-glm-Release-d7baec024c48c9d6b47f.json",
+					"name" : "glm",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "glm_autogen::@d090a432591bc19a3a56",
+					"jsonFile" : "target-glm_autogen-Release-e370e7c1d4bc53823633.json",
+					"name" : "glm_autogen",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "uninstall::@3253ab71256c6811a023",
+					"jsonFile" : "target-uninstall-Release-7109dd0cb3a698a70a2e.json",
+					"name" : "uninstall",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "unit::@fef23bd2ce31f13f63ea",
+					"jsonFile" : "target-unit-Release-01a295253425e6442a76.json",
+					"name" : "unit",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "unit_autogen::@fef23bd2ce31f13f63ea",
+					"jsonFile" : "target-unit_autogen-Release-2ae630216047670a2753.json",
+					"name" : "unit_autogen",
+					"projectIndex" : 2
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/build/MacOs_Dektop-Release",
+		"source" : "/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
