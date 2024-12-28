@@ -917,6 +917,7 @@
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_time.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/camera.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/SphereMeshBlendShape/include/sphere_mesh.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/Compiler/poppack1.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/Compiler/pushpack1.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include/assimp/MathFunctions.h \
@@ -1130,7 +1131,6 @@
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/mesh.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/ray.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/shader.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh_renderer.h \
   /usr/local/Cellar/qt/6.7.0_2/lib/QtCore.framework/Versions/A/Headers/QList \
   /usr/local/Cellar/qt/6.7.0_2/lib/QtCore.framework/Versions/A/Headers/QObject \

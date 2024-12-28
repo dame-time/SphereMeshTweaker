@@ -549,6 +549,15 @@ Qt6_DIR:PATH=/usr/local/lib/cmake/Qt6
 RT_LIBRARY:FILEPATH=RT_LIBRARY-NOTFOUND
 
 //Value Computed by CMake
+SphereMeshBlendShape_BINARY_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/SphereMeshBlendShape
+
+//Value Computed by CMake
+SphereMeshBlendShape_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+SphereMeshBlendShape_SOURCE_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/SphereMeshBlendShape
+
+//Value Computed by CMake
 SphereMeshTweaker_BINARY_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker
 
 //Value Computed by CMake
@@ -725,7 +734,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=8
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

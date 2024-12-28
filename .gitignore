@@ -6,7 +6,8 @@
 *.user
 *.sln.docstates
 
-# Build results
+# CMake
+*.cmake/
 
 # Roslyn cache directories
 *.ide/

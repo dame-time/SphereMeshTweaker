@@ -47,6 +47,11 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/SphereMeshBlendShape/cmake_install.cmake")
+endif()
+
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE DIRECTORY FILES "/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/SphereMeshTweaker.app" USE_SOURCE_PERMISSIONS)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker" AND

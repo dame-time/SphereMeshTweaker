@@ -449,18 +449,6 @@
 	"HEADERS" : 
 	[
 		[
-			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumper_graph.h",
-			"MU",
-			"EWIEGA46WW/moc_bumper_graph.cpp",
-			null
-		],
-		[
-			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumper_grid.h",
-			"MU",
-			"EWIEGA46WW/moc_bumper_grid.cpp",
-			null
-		],
-		[
 			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/camera.h",
 			"MU",
 			"EWIEGA46WW/moc_camera.cpp",
@@ -515,12 +503,6 @@
 			null
 		],
 		[
-			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh.h",
-			"MU",
-			"EWIEGA46WW/moc_sphere_mesh.cpp",
-			null
-		],
-		[
 			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh_renderer.h",
 			"MU",
 			"EWIEGA46WW/moc_sphere_mesh_renderer.cpp",
@@ -552,6 +534,7 @@
 		"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include",
 		"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/glm",
 		"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/assimp/include",
+		"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/SphereMeshBlendShape/include",
 		"/usr/local/lib/QtCore.framework/Headers",
 		"/usr/local/lib/QtCore.framework",
 		"/usr/local/share/qt/mkspecs/macx-clang",
@@ -605,16 +588,6 @@
 	"SOURCES" : 
 	[
 		[
-			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumer_grid.cpp",
-			"MU",
-			null
-		],
-		[
-			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumper_graph.cpp",
-			"MU",
-			null
-		],
-		[
 			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/camera.cpp",
 			"MU",
 			null
@@ -656,11 +629,6 @@
 		],
 		[
 			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/shader.cpp",
-			"MU",
-			null
-		],
-		[
-			"/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh.cpp",
 			"MU",
 			null
 		],

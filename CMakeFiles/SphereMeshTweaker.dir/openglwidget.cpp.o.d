@@ -1542,7 +1542,7 @@ CMakeFiles/SphereMeshTweaker.dir/openglwidget.cpp.o: \
   /usr/local/lib/QtOpenGL.framework/Headers/qopenglvertexarrayobject.h \
   /usr/local/lib/QtOpenGL.framework/Headers/QOpenGLBuffer \
   /usr/local/lib/QtOpenGL.framework/Headers/qopenglbuffer.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/external/SphereMeshBlendShape/include/sphere_mesh.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh_renderer.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/ray.h \
   /usr/local/lib/QtCore.framework/Headers/QDebug \

@@ -31,6 +31,7 @@ include_directories(${ASSIMP_DIR}/include)
 
 add_subdirectory(${GLM_DIR})
 add_subdirectory(${ASSIMP_DIR})
+add_subdirectory(external/SphereMeshBlendShape)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -51,11 +52,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         quadric.h quadric.cpp
         quadric3.h quadric3.cpp
         quadric2.h quadric2.cpp
-        bumper_grid.h bumer_grid.cpp
-        bumper_graph.h bumper_graph.cpp
         mesh.h mesh.cpp
         shader.h shader.cpp
-        sphere_mesh.h sphere_mesh.cpp
         camera.h camera.cpp
         sphere_mesh_renderer.h sphere_mesh_renderer.cpp
         ray.h
@@ -84,7 +82,7 @@ else()
 endif()
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${GLM_DIR})
-target_link_libraries(SphereMeshTweaker PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt6::OpenGLWidgets ${RESOURCES} glm assimp)
+target_link_libraries(SphereMeshTweaker PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt6::OpenGLWidgets ${RESOURCES} glm assimp SphereMeshBlendShape)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

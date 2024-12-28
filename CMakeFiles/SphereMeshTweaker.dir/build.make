@@ -196,38 +196,10 @@ CMakeFiles/SphereMeshTweaker.dir/quadric2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SphereMeshTweaker.dir/quadric2.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/quadric2.cpp -o CMakeFiles/SphereMeshTweaker.dir/quadric2.cpp.s
 
-CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o: CMakeFiles/SphereMeshTweaker.dir/flags.make
-CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o: bumer_grid.cpp
-CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o: CMakeFiles/SphereMeshTweaker.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o -MF CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o.d -o CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o -c /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumer_grid.cpp
-
-CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumer_grid.cpp > CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.i
-
-CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumer_grid.cpp -o CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.s
-
-CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o: CMakeFiles/SphereMeshTweaker.dir/flags.make
-CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o: bumper_graph.cpp
-CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o: CMakeFiles/SphereMeshTweaker.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o -MF CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o.d -o CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o -c /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumper_graph.cpp
-
-CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumper_graph.cpp > CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.i
-
-CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/bumper_graph.cpp -o CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.s
-
 CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o: CMakeFiles/SphereMeshTweaker.dir/flags.make
 CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o: mesh.cpp
 CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o: CMakeFiles/SphereMeshTweaker.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o -MF CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o.d -o CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o -c /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/mesh.cpp
 
 CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.i: cmake_force
@@ -241,7 +213,7 @@ CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.s: cmake_force
 CMakeFiles/SphereMeshTweaker.dir/shader.cpp.o: CMakeFiles/SphereMeshTweaker.dir/flags.make
 CMakeFiles/SphereMeshTweaker.dir/shader.cpp.o: shader.cpp
 CMakeFiles/SphereMeshTweaker.dir/shader.cpp.o: CMakeFiles/SphereMeshTweaker.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/shader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/shader.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SphereMeshTweaker.dir/shader.cpp.o -MF CMakeFiles/SphereMeshTweaker.dir/shader.cpp.o.d -o CMakeFiles/SphereMeshTweaker.dir/shader.cpp.o -c /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/shader.cpp
 
 CMakeFiles/SphereMeshTweaker.dir/shader.cpp.i: cmake_force
@@ -252,24 +224,10 @@ CMakeFiles/SphereMeshTweaker.dir/shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SphereMeshTweaker.dir/shader.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/shader.cpp -o CMakeFiles/SphereMeshTweaker.dir/shader.cpp.s
 
-CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.o: CMakeFiles/SphereMeshTweaker.dir/flags.make
-CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.o: sphere_mesh.cpp
-CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.o: CMakeFiles/SphereMeshTweaker.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.o -MF CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.o.d -o CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.o -c /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh.cpp
-
-CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh.cpp > CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.i
-
-CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh.cpp -o CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.s
-
 CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o: CMakeFiles/SphereMeshTweaker.dir/flags.make
 CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o: camera.cpp
 CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o: CMakeFiles/SphereMeshTweaker.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o -MF CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o.d -o CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o -c /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/camera.cpp
 
 CMakeFiles/SphereMeshTweaker.dir/camera.cpp.i: cmake_force
@@ -283,7 +241,7 @@ CMakeFiles/SphereMeshTweaker.dir/camera.cpp.s: cmake_force
 CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o: CMakeFiles/SphereMeshTweaker.dir/flags.make
 CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o: sphere_mesh_renderer.cpp
 CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o: CMakeFiles/SphereMeshTweaker.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o -MF CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o.d -o CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o -c /Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/sphere_mesh_renderer.cpp
 
 CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.i: cmake_force
@@ -304,11 +262,8 @@ SphereMeshTweaker_OBJECTS = \
 "CMakeFiles/SphereMeshTweaker.dir/quadric.cpp.o" \
 "CMakeFiles/SphereMeshTweaker.dir/quadric3.cpp.o" \
 "CMakeFiles/SphereMeshTweaker.dir/quadric2.cpp.o" \
-"CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o" \
-"CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o" \
 "CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o" \
 "CMakeFiles/SphereMeshTweaker.dir/shader.cpp.o" \
-"CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.o" \
 "CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o" \
 "CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o"
 
@@ -323,24 +278,22 @@ SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTwe
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/quadric.cpp.o
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/quadric3.cpp.o
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/quadric2.cpp.o
-SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/bumer_grid.cpp.o
-SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/bumper_graph.cpp.o
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/mesh.cpp.o
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/shader.cpp.o
-SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/sphere_mesh.cpp.o
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/camera.cpp.o
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/sphere_mesh_renderer.cpp.o
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/build.make
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /usr/local/lib/QtOpenGLWidgets.framework/Versions/A/QtOpenGLWidgets
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: external/glm/glm/libglmd.dylib
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: external/assimp/bin/libassimpd.5.4.3.dylib
+SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: external/SphereMeshBlendShape/libSphereMeshBlendShaped.a
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /usr/local/lib/QtWidgets.framework/Versions/A/QtWidgets
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /usr/local/lib/QtOpenGL.framework/Versions/A/QtOpenGL
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /usr/local/lib/QtGui.framework/Versions/A/QtGui
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /usr/local/lib/QtCore.framework/Versions/A/QtCore
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/lib/libz.tbd
 SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker: CMakeFiles/SphereMeshTweaker.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshTweaker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable SphereMeshTweaker.app/Contents/MacOS/SphereMeshTweaker"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SphereMeshTweaker.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

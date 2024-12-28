@@ -1,5 +1,6 @@
 # Hashes of file build rules.
 e24cb604b4e359bdc979631b2b5e11ef CMakeFiles/SphereMeshTweaker_autogen
+af6e0478f0504438bcf1b1828c498ac2 external/SphereMeshBlendShape/CMakeFiles/SphereMeshBlendShape_autogen
 cd6bd26ecfe97bc56ea00a5afa84e298 external/assimp/CMakeFiles/uninstall
 36043ff14f09bffe0185978fb440d63b external/assimp/code/CMakeFiles/assimp_autogen
 f447071914ab7ab177544e45c66d646a external/assimp/test/CMakeFiles/unit_autogen
